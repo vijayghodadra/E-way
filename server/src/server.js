@@ -25,22 +25,9 @@ app.use(helmet({
 }));
 
 // CORS Configuration
-const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:3000',
-  process.env.ADMIN_URL || 'http://localhost:3001',
-  'http://localhost:5173',
-  'http://localhost:5174'
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
-        callback(null, true);
-      } else {
-        callback(null, true); // Permissive in dev fallback
-      }
-    },
+    origin: true,
     credentials: true
   })
 );

@@ -26,10 +26,11 @@ const register = async (req, res, next) => {
     user.refreshToken = refreshToken;
     await user.save();
 
+    const isProd = process.env.NODE_ENV === 'production' || process.env.VERCEL;
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: isProd ? true : false,
+      sameSite: isProd ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
@@ -68,10 +69,11 @@ const login = async (req, res, next) => {
     user.refreshToken = refreshToken;
     await user.save();
 
+    const isProd = process.env.NODE_ENV === 'production' || process.env.VERCEL;
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: isProd ? true : false,
+      sameSite: isProd ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
