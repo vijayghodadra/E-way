@@ -220,7 +220,7 @@ const Navbar = () => {
 
                     {user?.role === 'admin' && (
                       <a
-                        href="http://localhost:3001"
+                        href={import.meta.env.VITE_ADMIN_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://e-way-admin.vercel.app')}
                         target="_blank"
                         rel="noreferrer"
                         className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-accent hover:bg-amber-50/50 transition-colors"
