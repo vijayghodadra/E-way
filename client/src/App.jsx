@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import Navbar from './components/Navbar';
@@ -23,8 +23,16 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import NotFound from './pages/NotFound';
+import AdminPortal from './pages/admin/AdminPortal';
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  if (isAdminRoute) {
+    return <AdminPortal />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-white">
       {/* Toast Notifications */}

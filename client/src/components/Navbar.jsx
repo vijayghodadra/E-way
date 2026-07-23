@@ -219,14 +219,13 @@ const Navbar = () => {
                     </div>
 
                     {user?.role === 'admin' && (
-                      <a
-                        href={import.meta.env.VITE_ADMIN_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://e-way-admin.vercel.app')}
-                        target="_blank"
-                        rel="noreferrer"
+                      <Link
+                        to="/admin"
+                        onClick={() => setUserDropdownOpen(false)}
                         className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-accent hover:bg-amber-50/50 transition-colors"
                       >
                         <ShieldAlert className="w-4 h-4 text-accent" /> Admin Dashboard
-                      </a>
+                      </Link>
                     )}
 
                     <Link
