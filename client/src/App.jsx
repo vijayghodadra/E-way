@@ -29,20 +29,20 @@ function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
 
-  if (isAdminRoute) {
-    return <AdminPortal />;
-  }
-
   return (
     <div className="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-white">
       {/* Toast Notifications */}
       <Toaster position="top-right" reverseOrder={false} />
 
-      {/* Global Interactive Overlays */}
-      <Navbar />
-      <CartDrawer />
-      <QuickViewModal />
-      <SearchModal />
+      {/* Global Storefront Overlays */}
+      {!isAdminRoute && (
+        <>
+          <Navbar />
+          <CartDrawer />
+          <QuickViewModal />
+          <SearchModal />
+        </>
+      )}
 
       {/* Route Views */}
       <main className="flex-grow">
@@ -61,11 +61,12 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/admin/*" element={<AdminPortal />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }

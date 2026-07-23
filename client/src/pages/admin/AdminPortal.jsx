@@ -104,6 +104,7 @@ function AdminPortal() {
           <Route path="/products" element={<ProductsManager />} />
           <Route path="/orders" element={<OrdersManager />} />
           <Route path="/coupons" element={<CouponsManager />} />
+          <Route path="*" element={<Dashboard />} />
         </Routes>
       </main>
 
