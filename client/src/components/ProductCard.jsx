@@ -65,12 +65,16 @@ const ProductCard = ({ product }) => {
           <img
             src={product.images?.[0] || 'https://images.unsplash.com/photo-1608248597560-8438b4562c55?auto=format&fit=crop&q=80&w=800'}
             alt={product.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
           {product.images?.[1] && (
             <img
               src={product.images[1]}
               alt={`${product.title} hover`}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             />
           )}
