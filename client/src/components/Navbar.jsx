@@ -178,16 +178,17 @@ const Navbar = () => {
             </button>
 
             {/* User Profile / Login */}
-            <div className="relative">
+            <div className="relative flex items-center">
               {isAuthenticated ? (
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2 p-1.5 rounded-full border border-stone-200 hover:border-primary transition-all"
+                  className="w-9 h-9 sm:w-auto sm:h-9 flex items-center justify-center sm:justify-start gap-2 p-0.5 sm:px-2.5 sm:py-1 rounded-full border border-stone-200 hover:border-primary transition-all shrink-0 focus:outline-none"
+                  title={user?.name || 'User Profile'}
                 >
                   <img
                     src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'}
                     alt={user?.name || 'User'}
-                    className="w-7 h-7 rounded-full object-cover"
+                    className="w-[30px] h-[30px] sm:w-7 sm:h-7 rounded-full object-cover shrink-0 aspect-square"
                   />
                   <span className="hidden sm:inline-block text-xs font-semibold text-stone-700 max-w-[80px] truncate">
                     {user?.name?.split(' ')[0]}
@@ -196,9 +197,10 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="p-2 text-stone-700 hover:text-primary transition-colors flex items-center gap-1 text-xs font-semibold"
+                  className="w-9 h-9 sm:w-auto sm:h-9 flex items-center justify-center gap-1.5 p-1.5 sm:px-3 text-stone-700 hover:text-primary transition-colors text-xs font-semibold rounded-full border border-stone-200 hover:border-primary shrink-0"
+                  title="Sign In"
                 >
-                  <User className="w-5 h-5" />
+                  <User className="w-5 h-5 shrink-0" />
                   <span className="hidden sm:inline-block">Sign In</span>
                 </Link>
               )}

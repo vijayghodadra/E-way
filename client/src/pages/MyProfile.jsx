@@ -46,7 +46,7 @@ const MyProfile = () => {
             <img
               src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400'}
               alt={user?.name}
-              className="w-16 h-16 rounded-full object-cover border-2 border-primary"
+              className="w-16 h-16 rounded-full object-cover border-2 border-primary shrink-0 aspect-square"
             />
             <div>
               <h3 className="font-playfair text-xl font-bold text-text">{user?.name}</h3>
