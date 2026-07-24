@@ -59,7 +59,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8">
             {categories.map((cat, idx) => {
               // Custom metadata for luxury badges & tags based on slug
               const categoryMeta = {
@@ -101,7 +101,7 @@ const Home = () => {
                 >
                   <Link
                     to={`/shop?category=${cat.slug}`}
-                    className="group relative flex flex-col justify-between h-[420px] rounded-3xl overflow-hidden bg-stone-900 border border-stone-200/80 shadow-md hover:shadow-2xl hover:shadow-emerald-950/20 transition-all duration-500"
+                    className="group relative flex flex-col justify-between h-[270px] sm:h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-900 border border-stone-200/80 shadow-md hover:shadow-2xl hover:shadow-emerald-950/20 transition-all duration-500"
                   >
                     {/* Background Category Image with Fallback */}
                     <img
@@ -118,40 +118,41 @@ const Home = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-black/20 group-hover:from-stone-950 group-hover:via-stone-950/60 transition-all duration-500" />
 
                     {/* Top Header Card Info */}
-                    <div className="relative z-10 p-6 flex items-center justify-between">
-                      <span className="text-[11px] font-semibold tracking-wider text-amber-200 bg-stone-950/70 backdrop-blur-md px-3 py-1 rounded-full border border-amber-400/30 shadow-sm">
+                    <div className="relative z-10 p-3 sm:p-6 flex items-center justify-between gap-1">
+                      <span className="text-[9px] sm:text-[11px] font-semibold tracking-wider text-amber-200 bg-stone-950/80 backdrop-blur-md px-2 py-0.5 sm:px-3 sm:py-1 rounded-full border border-amber-400/30 shadow-xs truncate max-w-[75%] sm:max-w-none">
                         {categoryMeta.badge}
                       </span>
-                      <span className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-amber-400 group-hover:text-stone-950 transition-colors duration-300">
-                        <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                      <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-amber-400 group-hover:text-stone-950 transition-colors duration-300 shrink-0">
+                        <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-0.5 transition-transform" />
                       </span>
                     </div>
 
                     {/* Bottom Content Container */}
-                    <div className="relative z-10 p-6 text-white bg-stone-950/40 backdrop-blur-[2px] border-t border-white/10 group-hover:bg-stone-950/75 group-hover:border-amber-400/30 transition-all duration-300">
+                    <div className="relative z-10 p-3 sm:p-6 text-white bg-stone-950/50 backdrop-blur-[2px] border-t border-white/10 group-hover:bg-stone-950/75 group-hover:border-amber-400/30 transition-all duration-300">
                       {/* Concern Tags */}
-                      <div className="flex gap-2 mb-2">
+                      <div className="flex flex-wrap gap-1 mb-1 sm:mb-2">
                         {categoryMeta.tags.map((t, tIdx) => (
-                          <span key={tIdx} className="text-[10px] font-medium text-amber-300/90 tracking-wide">
+                          <span key={tIdx} className="text-[8px] sm:text-[10px] font-medium text-amber-300/90 tracking-wide">
                             {t}
                           </span>
                         ))}
                       </div>
 
-                      <h3 className="font-playfair text-2xl font-bold mb-2 group-hover:text-amber-300 transition-colors">
+                      <h3 className="font-playfair text-sm sm:text-2xl font-bold mb-1 sm:mb-2 leading-tight group-hover:text-amber-300 transition-colors line-clamp-1 sm:line-clamp-none">
                         {cat.name}
                       </h3>
 
-                      <p className="text-xs text-stone-300 line-clamp-2 mb-4 font-light leading-relaxed">
+                      <p className="hidden sm:block text-xs text-stone-300 line-clamp-2 mb-4 font-light leading-relaxed">
                         {cat.description}
                       </p>
 
-                      <div className="flex items-center justify-between pt-2 border-t border-white/10">
-                        <span className="text-xs font-semibold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider group-hover:text-amber-200">
-                          Explore Collection
+                      <div className="flex items-center justify-between pt-1.5 sm:pt-2 border-t border-white/10">
+                        <span className="text-[9px] sm:text-xs font-semibold text-amber-300 flex items-center gap-1 uppercase tracking-wider group-hover:text-amber-200">
+                          <span className="hidden sm:inline">Explore Collection</span>
+                          <span className="inline sm:hidden">Explore</span>
                         </span>
-                        <div className="flex items-center gap-1 text-xs text-amber-300 group-hover:translate-x-1 transition-transform duration-300">
-                          <ArrowRight className="w-4 h-4" />
+                        <div className="flex items-center gap-1 text-amber-300 group-hover:translate-x-1 transition-transform duration-300">
+                          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                         </div>
                       </div>
                     </div>
