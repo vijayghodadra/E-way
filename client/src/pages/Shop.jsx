@@ -266,6 +266,8 @@ const Shop = () => {
             )}
           </div>
         </div>
+      </div>
+
       {/* Mobile Filter Drawer Overlay */}
       <AnimatePresence>
         {mobileFilterOpen && (
