@@ -209,15 +209,17 @@ const Navbar = () => {
               <AnimatePresence>
                 {userDropdownOpen && isAuthenticated && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
+                    exit={{ opacity: 0, y: 8 }}
                     onMouseLeave={() => setUserDropdownOpen(false)}
-                    className="absolute right-0 mt-3 w-56 glass-panel rounded-2xl shadow-xl py-2 z-50 border border-stone-200/80"
+                    className="absolute right-0 top-full mt-2.5 w-60 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl py-2 z-50 border border-stone-200/90"
                   >
-                    <div className="px-4 py-2 border-b border-stone-100 mb-1">
-                      <p className="text-xs font-semibold text-text truncate">{user?.name}</p>
-                      <p className="text-[11px] text-muted truncate">{user?.email}</p>
+                    <div className="px-4 py-2.5 border-b border-stone-100 mb-1 bg-stone-50/60 rounded-t-2xl">
+                      <p className="text-xs font-bold text-stone-900 truncate">{user?.name}</p>
+                      <p className="text-[11px] font-medium text-stone-500 truncate mt-0.5" title={user?.email}>
+                        {user?.email}
+                      </p>
                     </div>
 
                     {user?.role === 'admin' && (
