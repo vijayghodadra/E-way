@@ -168,7 +168,7 @@ const Navbar = () => {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-primary text-white font-bold text-[10px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md border border-white"
+                    className="absolute -top-1 -right-1 bg-accent text-stone-950 font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-sm"
                   >
                     {totalCartCount}
                   </motion.span>
