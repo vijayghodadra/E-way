@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import QuickViewModal from './components/QuickViewModal';
 import SearchModal from './components/SearchModal';
+import ScrollToTop from './components/ScrollToTop';
 
 // Route Code Splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -42,6 +43,9 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-white">
+      {/* Auto Scroll To Top on Navigation */}
+      <ScrollToTop />
+
       {/* Toast Notifications */}
       <Toaster position="top-right" reverseOrder={false} />
 
