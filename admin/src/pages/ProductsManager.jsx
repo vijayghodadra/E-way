@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Search, X, Sparkles } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, X, Sparkles, Upload } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
@@ -20,6 +20,21 @@ const ProductsManager = () => {
     description: '',
     ingredients: ''
   });
+
+  const handleImageFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('Image file size must be less than 10MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setForm((prev) => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const fetchProducts = async () => {
     try {
@@ -179,14 +194,41 @@ const ProductsManager = () => {
                 </div>
               </div>
               <div>
-                <label className="block mb-1">Image URL</label>
-                <input
-                  type="text"
-                  value={form.image}
-                  onChange={(e) => setForm({ ...form, image: e.target.value })}
-                  placeholder="https://..."
-                  className="w-full bg-stone-50 p-2.5 rounded-xl border"
-                />
+                <label className="block text-stone-600 font-semibold mb-1">
+                  Product Image (Select from Gallery / Device)
+                </label>
+                <div className="relative border-2 border-dashed border-stone-300 hover:border-emerald-800 bg-stone-50 rounded-2xl p-4 text-center transition-all cursor-pointer group">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageFileChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                  />
+                  {form.image ? (
+                    <div className="flex flex-col items-center gap-2">
+                      <img
+                        src={form.image}
+                        alt="Selected Preview"
+                        className="w-24 h-24 object-cover rounded-xl border-2 border-emerald-800 shadow-sm"
+                      />
+                      <span className="text-[11px] font-semibold text-emerald-800 flex items-center gap-1">
+                        <Upload className="w-3.5 h-3.5" /> Tap to change image from gallery
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center gap-1.5 py-3">
+                      <div className="w-10 h-10 rounded-full bg-emerald-900/10 text-emerald-900 flex items-center justify-center">
+                        <Upload className="w-5 h-5" />
+                      </div>
+                      <p className="text-xs font-bold text-stone-800">
+                        Choose Image from Mobile Gallery / Device
+                      </p>
+                      <p className="text-[10px] text-stone-500">
+                        PNG, JPG, WEBP formats supported
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
               <div>
                 <label className="block mb-1">Description</label>
