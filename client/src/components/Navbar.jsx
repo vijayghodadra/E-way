@@ -277,15 +277,17 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.22, ease: 'linear' }}
               onClick={() => dispatch(toggleMobileMenu())}
-              className="fixed inset-0 bg-stone-900/50 backdrop-blur-sm"
+              className="fixed inset-0 bg-stone-950/60"
             />
             <motion.div
               initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
+              animate={{ x: '0%' }}
               exit={{ x: '-100%' }}
-              transition={{ type: 'spring', damping: 25 }}
-              className="relative w-4/5 max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto"
+              transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+              style={{ willChange: 'transform' }}
+              className="relative w-[82%] max-w-xs sm:max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between z-10 overflow-y-auto transform-gpu"
             >
               <div>
                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-stone-100">

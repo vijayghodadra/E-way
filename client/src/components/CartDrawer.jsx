@@ -72,17 +72,19 @@ const CartDrawer = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.22, ease: 'linear' }}
           onClick={() => dispatch(setCartOpen(false))}
-          className="fixed inset-0 bg-stone-900/60 backdrop-blur-sm"
+          className="fixed inset-0 bg-stone-950/60"
         />
 
         {/* Drawer Panel */}
         <motion.div
           initial={{ x: '100%' }}
-          animate={{ x: 0 }}
+          animate={{ x: '0%' }}
           exit={{ x: '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between z-10"
+          transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+          style={{ willChange: 'transform' }}
+          className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between z-10 transform-gpu"
         >
           {/* Header */}
           <div className="p-6 border-b border-stone-100 flex items-center justify-between bg-stone-50/50">
