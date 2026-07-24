@@ -14,7 +14,7 @@ const MegaMenu = ({ isOpen, onClose, categories = [] }) => {
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
         onMouseLeave={onClose}
-        className="absolute top-full left-0 w-full glass-panel border-t border-stone-200/60 shadow-luxury py-10 z-40"
+        className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-b border-stone-200/90 py-10 z-50"
       >
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-12 gap-8 items-center">
           {/* Column 1: Featured Categories List */}
