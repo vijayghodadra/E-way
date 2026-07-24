@@ -1,17 +1,22 @@
 const Razorpay = require('razorpay');
 
-let razorpayInstance = null;
+const getRazorpayInstance = () => {
+  const key_id = process.env.RAZORPAY_KEY_ID;
+  const key_secret = process.env.RAZORPAY_KEY_SECRET;
 
-try {
-  const key_id = process.env.RAZORPAY_KEY_ID || 'rzp_test_mockkey12345678';
-  const key_secret = process.env.RAZORPAY_KEY_SECRET || 'mocksecret1234567890';
+  if (!key_id || !key_secret || key_id.includes('mockkey')) {
+    return null;
+  }
 
-  razorpayInstance = new Razorpay({
-    key_id,
-    key_secret
-  });
-} catch (err) {
-  console.warn('[Razorpay Warning]: Razorpay initialization skipped due to missing keys. Mock fallback active.');
-}
+  try {
+    return new Razorpay({
+      key_id,
+      key_secret
+    });
+  } catch (err) {
+    console.error('[Razorpay Error]: Failed to instantiate Razorpay client:', err.message);
+    return null;
+  }
+};
 
-module.exports = razorpayInstance;
+module.exports = getRazorpayInstance;

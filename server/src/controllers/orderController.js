@@ -1,6 +1,6 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
-const razorpayInstance = require('../config/razorpay');
+const getRazorpayInstance = require('../config/razorpay');
 const crypto = require('crypto');
 
 // @desc Create New Order
@@ -60,14 +60,16 @@ const createRazorpayOrder = async (req, res, next) => {
       receipt: `receipt_${order._id}`
     };
 
-    if (razorpayInstance) {
-      const razorpayOrder = await razorpayInstance.orders.create(options);
+    const rzp = getRazorpayInstance();
+
+    if (rzp) {
+      const razorpayOrder = await rzp.orders.create(options);
       return res.json({
         success: true,
         razorpayOrderId: razorpayOrder.id,
         amount: razorpayOrder.amount,
         currency: razorpayOrder.currency,
-        key: process.env.RAZORPAY_KEY_ID || 'rzp_test_mockkey12345678'
+        key: process.env.RAZORPAY_KEY_ID
       });
     } else {
       // Mock fallback if keys missing
