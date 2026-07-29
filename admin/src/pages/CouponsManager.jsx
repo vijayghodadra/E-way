@@ -41,7 +41,7 @@ const CouponsManager = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-playfair text-2xl font-bold text-stone-900">Promotions & Coupons</h1>
+        <h1 className="text-2xl font-bold text-stone-900">Promotions & Coupons</h1>
         <p className="text-xs text-stone-500 font-medium">Create promotional vouchers and discount rules.</p>
       </div>
 

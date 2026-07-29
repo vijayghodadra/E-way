@@ -179,11 +179,11 @@ const ProductDetails = () => {
 
               {/* Price Display */}
               <div className="flex items-baseline gap-4 mb-6 p-4 rounded-2xl bg-secondary/80 border border-stone-200/80">
-                <span className="font-playfair text-3xl font-bold text-primary">
+                <span className="font-sans text-3xl font-bold text-primary">
                   ₹{displayPrice.toLocaleString('en-IN')}
                 </span>
                 {product.discountPrice > 0 && (
-                  <span className="text-base text-stone-400 line-through">
+                  <span className="text-base text-stone-400 line-through font-sans">
                     ₹{product.price.toLocaleString('en-IN')}
                   </span>
                 )}

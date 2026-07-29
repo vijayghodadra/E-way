@@ -312,7 +312,7 @@ const Checkout = () => {
                       <h4 className="font-semibold text-text truncate">{item.product.title}</h4>
                       <span className="text-stone-400">Qty: {item.quantity}</span>
                     </div>
-                    <span className="font-bold text-primary">
+                    <span className="font-bold text-primary font-sans">
                       ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                     </span>
                   </div>
@@ -323,25 +323,25 @@ const Checkout = () => {
               <div className="space-y-2 text-xs text-stone-600 border-t border-stone-100 pt-4 font-medium">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>₹{subtotal.toLocaleString('en-IN')}</span>
+                  <span className="font-sans">₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
                 {coupon && (
                   <div className="flex justify-between text-emerald-700 font-semibold">
                     <span>Coupon ({coupon.code})</span>
-                    <span>-₹{discountAmount.toLocaleString('en-IN')}</span>
+                    <span className="font-sans">-₹{discountAmount.toLocaleString('en-IN')}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
                   <span>Estimated GST (5%)</span>
-                  <span>₹{taxPrice.toLocaleString('en-IN')}</span>
+                  <span className="font-sans">₹{taxPrice.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping Fee</span>
-                  <span>{shippingPrice === 0 ? <strong className="text-emerald-600">FREE</strong> : `₹${shippingPrice}`}</span>
+                  <span className="font-sans">{shippingPrice === 0 ? <strong className="text-emerald-600 font-sans">FREE</strong> : `₹${shippingPrice}`}</span>
                 </div>
                 <div className="flex justify-between text-base font-bold text-primary pt-3 border-t border-stone-100">
                   <span>Total Amount</span>
-                  <span>₹{totalPrice.toLocaleString('en-IN')}</span>
+                  <span className="font-sans">₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
               </div>
 

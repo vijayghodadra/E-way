@@ -43,7 +43,7 @@ const OrdersManager = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-playfair text-2xl font-bold text-stone-900">Fulfillment & Orders</h1>
+        <h1 className="text-2xl font-bold text-stone-900">Fulfillment & Orders</h1>
         <p className="text-xs text-stone-500 font-medium">Manage order status pipeline from Packing to Delivery.</p>
       </div>
 

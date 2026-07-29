@@ -5,6 +5,7 @@ import { Sparkles, ArrowRight, ShieldCheck, Leaf, Heart, Star, Award, ChevronRig
 import ProductCard from '../components/ProductCard';
 import HeroSlider from '../components/HeroSlider';
 import SEO from '../components/SEO';
+import TestimonialSlider from '../components/TestimonialSlider';
 import { fetchProductsAPI, fetchCategoriesAPI } from '../api/queries';
 
 const Home = () => {
@@ -325,35 +326,7 @@ const Home = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                quote: 'The Golden Saffron Elixir completely transformed my stubborn dark spots in 3 weeks. It feels like absolute liquid gold on the skin!',
-                author: 'Dr. Radhika Roy',
-                role: 'Dermatology Consultant'
-              },
-              {
-                quote: 'The Rose Dew Nectar smells heavenly and gives me an effortless glass-skin glow without feeling heavy under makeup.',
-                author: 'Meera Kapoor',
-                role: 'Beauty Editor, Vogue Luxe'
-              },
-              {
-                quote: 'The Bhringraj scalp oil rescued my postpartum hair loss. Highest quality botanical oil I have ever used.',
-                author: 'Ananya Sharma',
-                role: 'Verified Purchaser'
-              }
-            ].map((rev, i) => (
-              <div key={i} className="bg-white p-8 rounded-3xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
-                <p className="text-xs sm:text-sm text-stone-600 italic leading-relaxed mb-6">
-                  "{rev.quote}"
-                </p>
-                <div>
-                  <h4 className="font-playfair text-sm font-bold text-text">{rev.author}</h4>
-                  <span className="text-[11px] text-muted">{rev.role}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TestimonialSlider />
         </div>
       </section>
     </>

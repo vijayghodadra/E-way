@@ -40,11 +40,11 @@ function App() {
       <aside className="w-64 bg-stone-900 text-white flex flex-col justify-between p-6 hidden md:flex">
         <div className="space-y-8">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-full bg-accent text-stone-950 flex items-center justify-center font-playfair font-bold text-sm">
+            <div className="w-9 h-9 rounded-full bg-accent text-stone-950 flex items-center justify-center font-bold text-sm">
               C+
             </div>
             <div>
-              <h2 className="font-playfair text-base font-bold text-white leading-none">CARE+</h2>
+              <h2 className="text-base font-bold text-white leading-none">CARE+</h2>
               <span className="text-[9px] text-accent tracking-widest uppercase font-bold">ADMIN PORTAL</span>
             </div>
           </div>

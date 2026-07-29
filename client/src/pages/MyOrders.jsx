@@ -75,7 +75,7 @@ const MyOrders = () => {
                   </div>
                   <div>
                     <span className="text-[11px] text-stone-400 font-medium">Total</span>
-                    <p className="text-xs font-bold text-primary">₹{order.totalPrice.toLocaleString('en-IN')}</p>
+                    <p className="text-xs font-bold text-primary font-sans">₹{order.totalPrice.toLocaleString('en-IN')}</p>
                   </div>
                   <div>
                     <span className="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full">

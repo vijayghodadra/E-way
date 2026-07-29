@@ -175,7 +175,7 @@ const CartDrawer = () => {
                     </div>
 
                     <div className="flex items-center justify-between mt-2">
-                      <span className="font-semibold text-sm text-primary">
+                      <span className="font-semibold text-sm text-primary font-sans">
                         ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                       </span>
 
@@ -258,21 +258,21 @@ const CartDrawer = () => {
               <div className="space-y-1.5 text-xs text-stone-600 border-t border-stone-100 pt-3">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="font-semibold text-text">₹{subtotal.toLocaleString('en-IN')}</span>
+                  <span className="font-semibold text-text font-sans">₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
                 {coupon && (
                   <div className="flex justify-between text-emerald-700">
                     <span>Discount</span>
-                    <span>-₹{discountAmount.toLocaleString('en-IN')}</span>
+                    <span className="font-sans">-₹{discountAmount.toLocaleString('en-IN')}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
                   <span>Express Delivery</span>
-                  <span>{shippingFee === 0 ? <strong className="text-emerald-600 uppercase text-[10px]">Free</strong> : `₹${shippingFee}`}</span>
+                  <span className="font-sans">{shippingFee === 0 ? <strong className="text-emerald-600 uppercase text-[10px] font-sans">Free</strong> : `₹${shippingFee}`}</span>
                 </div>
                 <div className="flex justify-between text-sm font-bold text-primary pt-2 border-t border-stone-100">
                   <span>Estimated Total</span>
-                  <span>₹{estimatedTotal.toLocaleString('en-IN')}</span>
+                  <span className="font-sans">₹{estimatedTotal.toLocaleString('en-IN')}</span>
                 </div>
               </div>
 

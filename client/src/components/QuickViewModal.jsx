@@ -109,11 +109,11 @@ const QuickViewModal = () => {
               )}
 
               <div className="flex items-baseline gap-3 mb-6">
-                <span className="text-2xl font-bold text-primary">
+                <span className="text-2xl font-bold text-primary font-sans">
                   ₹{displayPrice?.toLocaleString('en-IN')}
                 </span>
                 {product.discountPrice > 0 && (
-                  <span className="text-sm text-stone-400 line-through">
+                  <span className="text-sm text-stone-400 line-through font-sans">
                     ₹{product.price?.toLocaleString('en-IN')}
                   </span>
                 )}

@@ -108,21 +108,12 @@ const Navbar = () => {
               Shop All
             </Link>
 
-            {/* Mega Menu Trigger */}
-            <div
-              onMouseEnter={() => setMegaMenuOpen(true)}
-              className="relative cursor-pointer py-2 flex items-center gap-1 hover:text-primary transition-colors"
-            >
-              <span>Categories</span>
-              <ChevronDown className="w-4 h-4 text-stone-400 group-hover:text-primary" />
-            </div>
-
             <Link to="/shop?sort=bestseller" className="hover:text-primary transition-colors">
               Best Sellers
             </Link>
 
-            <Link to="/shop?sort=newest" className="hover:text-primary transition-colors">
-              New Launches
+            <Link to="/about" className={`hover:text-primary transition-colors ${location.pathname === '/about' ? 'text-primary font-semibold' : ''}`}>
+              About Us
             </Link>
           </nav>
 
@@ -321,13 +312,6 @@ const Navbar = () => {
                     Shop All
                   </Link>
                   <Link
-                    to="/shop?category=botanical-skincare"
-                    onClick={() => dispatch(toggleMobileMenu())}
-                    className="block py-2 border-b border-stone-100 hover:text-primary"
-                  >
-                    Categories
-                  </Link>
-                  <Link
                     to="/shop?sort=bestseller"
                     onClick={() => dispatch(toggleMobileMenu())}
                     className="block py-2 border-b border-stone-100 hover:text-primary"
@@ -335,11 +319,11 @@ const Navbar = () => {
                     Best Sellers
                   </Link>
                   <Link
-                    to="/shop?sort=newest"
+                    to="/about"
                     onClick={() => dispatch(toggleMobileMenu())}
                     className="block py-2 border-b border-stone-100 hover:text-primary"
                   >
-                    New Launches
+                    About Us
                   </Link>
                 </nav>
               </div>

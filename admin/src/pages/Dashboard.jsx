@@ -62,7 +62,7 @@ const Dashboard = () => {
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-playfair text-2xl font-bold text-stone-900">Executive Performance Dashboard</h1>
+          <h1 className="text-2xl font-bold text-stone-900">Executive Performance Dashboard</h1>
           <p className="text-xs text-stone-500 font-medium">Real-time revenue metrics, sales volume, and order activity.</p>
         </div>
 
@@ -83,7 +83,7 @@ const Dashboard = () => {
               <DollarSign className="w-5 h-5" />
             </div>
           </div>
-          <span className="font-playfair text-2xl font-bold text-stone-900">
+          <span className="text-2xl font-bold text-stone-900">
             ₹{data?.totalRevenue?.toLocaleString('en-IN')}
           </span>
           <span className="text-[11px] text-emerald-600 font-semibold block mt-1 flex items-center gap-1">
@@ -98,7 +98,7 @@ const Dashboard = () => {
               <ShoppingBag className="w-5 h-5" />
             </div>
           </div>
-          <span className="font-playfair text-2xl font-bold text-stone-900">{data?.totalOrders}</span>
+          <span className="text-2xl font-bold text-stone-900">{data?.totalOrders}</span>
           <span className="text-[11px] text-stone-400 block mt-1">Completed purchases</span>
         </div>
 
@@ -109,7 +109,7 @@ const Dashboard = () => {
               <Package className="w-5 h-5" />
             </div>
           </div>
-          <span className="font-playfair text-2xl font-bold text-stone-900">{data?.totalProducts}</span>
+          <span className="text-2xl font-bold text-stone-900">{data?.totalProducts}</span>
           <span className="text-[11px] text-stone-400 block mt-1">In store catalog</span>
         </div>
 
@@ -120,14 +120,14 @@ const Dashboard = () => {
               <Users className="w-5 h-5" />
             </div>
           </div>
-          <span className="font-playfair text-2xl font-bold text-stone-900">{data?.totalUsers}</span>
+          <span className="text-2xl font-bold text-stone-900">{data?.totalUsers}</span>
           <span className="text-[11px] text-stone-400 block mt-1">Customer accounts</span>
         </div>
       </div>
 
       {/* Recent Orders Table */}
       <div className="bg-white rounded-2xl p-6 border border-stone-200/80 shadow-sm space-y-4">
-        <h3 className="font-playfair text-lg font-bold text-stone-900">Recent Customer Activity</h3>
+        <h3 className="text-lg font-bold text-stone-900">Recent Customer Activity</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>

@@ -38,7 +38,7 @@ const AdminLogin = ({ setAdminToken }) => {
           <div className="w-12 h-12 rounded-full bg-accent text-stone-950 flex items-center justify-center mx-auto mb-3 font-bold text-base">
             C+
           </div>
-          <h1 className="font-playfair text-2xl font-bold">Care+ Executive Admin</h1>
+          <h1 className="text-2xl font-bold">Care+ Executive Admin</h1>
           <p className="text-xs text-stone-400 font-light mt-1">Management Portal & Inventory Control</p>
         </div>
 

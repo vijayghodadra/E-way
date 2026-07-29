@@ -5,9 +5,12 @@ import axios from 'axios';
 
 const ProductsManager = () => {
   const [products, setProducts] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   const [form, setForm] = useState({
     title: '',
@@ -18,7 +21,13 @@ const ProductsManager = () => {
     category: '',
     image: '',
     description: '',
-    ingredients: ''
+    ingredients: '',
+    volume: '50ml / 1.7 fl oz',
+    rating: 4.8,
+    numReviews: 0,
+    isBestSeller: false,
+    isNewArrival: false,
+    isFeatured: false
   });
 
   const handleImageFileChange = (e) => {
@@ -47,32 +56,114 @@ const ProductsManager = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get('/api/v1/categories');
+      const cats = res.data.categories || [];
+      setCategoriesList(cats);
+      if (cats.length && !form.category) {
+        setForm((prev) => ({ ...prev, category: cats[0]._id }));
+      }
+    } catch (err) {
+      console.error('Error fetching categories:', err);
+      const fallback = [
+        { _id: '65f12a3b4c5d6e7f8a9b0c1d', name: 'Botanical Skincare' },
+        { _id: '65f12a3b4c5d6e7f8a9b0c2d', name: 'Herbal Hair Care' },
+        { _id: '65f12a3b4c5d6e7f8a9b0c3d', name: 'Artisanal Body Care' },
+        { _id: '65f12a3b4c5d6e7f8a9b0c4d', name: 'Aromatherapy & Wellness' }
+      ];
+      setCategoriesList(fallback);
+      if (!form.category) {
+        setForm((prev) => ({ ...prev, category: fallback[0]._id }));
+      }
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
 
-  const handleCreateProduct = async (e) => {
+  const handleAddNewClick = () => {
+    setIsEditing(false);
+    setEditId(null);
+    setForm({
+      title: '',
+      subtitle: '',
+      price: '',
+      discountPrice: '',
+      stock: 50,
+      category: categoriesList[0]?._id || '',
+      image: '',
+      description: '',
+      ingredients: '',
+      volume: '50ml / 1.7 fl oz',
+      rating: 4.8,
+      numReviews: 0,
+      isBestSeller: false,
+      isNewArrival: false,
+      isFeatured: false
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleEditClick = (p) => {
+    setIsEditing(true);
+    setEditId(p._id);
+    setForm({
+      title: p.title || '',
+      subtitle: p.subtitle || '',
+      price: p.price || '',
+      discountPrice: p.discountPrice || '',
+      stock: p.stock || 50,
+      category: p.category?._id || p.category || '',
+      image: p.images?.[0] || '',
+      description: p.description || '',
+      ingredients: p.ingredients ? p.ingredients.join(', ') : '',
+      volume: p.volume || '50ml / 1.7 fl oz',
+      rating: p.rating || 4.8,
+      numReviews: p.numReviews || 0,
+      isBestSeller: !!p.isBestSeller,
+      isNewArrival: !!p.isNewArrival,
+      isFeatured: !!p.isFeatured
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleSaveProduct = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('admin_token');
-      await axios.post(
-        '/api/v1/admin/products',
-        {
-          ...form,
-          price: Number(form.price),
-          discountPrice: Number(form.discountPrice || form.price),
-          stock: Number(form.stock),
-          images: [form.image || 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&q=80&w=800'],
-          ingredients: form.ingredients ? form.ingredients.split(',').map((i) => i.trim()) : []
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      toast.success('Product created successfully!');
+      const payload = {
+        ...form,
+        price: Number(form.price),
+        discountPrice: Number(form.discountPrice || form.price),
+        stock: Number(form.stock),
+        rating: Number(form.rating || 4.8),
+        numReviews: Number(form.numReviews || 0),
+        images: [form.image || 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&q=80&w=800'],
+        ingredients: form.ingredients ? form.ingredients.split(',').map((i) => i.trim()).filter(Boolean) : []
+      };
+
+      if (isEditing) {
+        await axios.put(
+          `/api/v1/admin/products/${editId}`,
+          payload,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        toast.success('Product updated successfully!');
+      } else {
+        await axios.post(
+          '/api/v1/admin/products',
+          payload,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        toast.success('Product created successfully!');
+      }
       setIsModalOpen(false);
-      setForm({ title: '', subtitle: '', price: '', discountPrice: '', stock: 50, category: '', image: '', description: '', ingredients: '' });
       fetchProducts();
     } catch (err) {
-      toast.error('Failed to create product');
+      toast.error(isEditing ? 'Failed to update product' : 'Failed to create product');
     }
   };
 
@@ -98,12 +189,12 @@ const ProductsManager = () => {
     <div className="space-y-6 pb-16 md:pb-0">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-playfair text-2xl font-bold text-stone-900">Products & Inventory Control</h1>
+          <h1 className="text-2xl font-bold text-stone-900">Products & Inventory Control</h1>
           <p className="text-xs text-stone-500 font-medium">Manage formulations, pricing, stock levels, and store listings.</p>
         </div>
 
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleAddNewClick}
           className="bg-amber-400 text-stone-950 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-amber-300 transition-all flex items-center gap-1.5 shadow-sm"
         >
           <Plus className="w-4 h-4" /> Add New Formulation
@@ -146,15 +237,35 @@ const ProductsManager = () => {
                       <p className="text-[10px] text-stone-400">{prod.category?.name || 'General'}</p>
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-bold text-emerald-900">₹{prod.price}</td>
+                  <td className="py-3 px-4 font-bold text-emerald-900 font-sans">
+                    {prod.discountPrice && prod.discountPrice < prod.price ? (
+                      <div className="flex flex-col">
+                        <span>₹{prod.discountPrice}</span>
+                        <span className="text-[10px] text-stone-400 line-through">₹{prod.price}</span>
+                      </div>
+                    ) : (
+                      <span>₹{prod.price}</span>
+                    )}
+                  </td>
                   <td className="py-3 px-4">
                     <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${prod.stock > 10 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`}>
                       {prod.stock} in stock
                     </span>
                   </td>
                   <td className="py-3 px-4 text-right space-x-2">
-                    <button onClick={() => handleDeleteProduct(prod._id)} className="p-1.5 text-rose-600 hover:bg-rose-50 rounded-lg">
-                      <Trash2 className="w-4 h-4" />
+                    <button
+                      onClick={() => handleEditClick(prod)}
+                      className="p-1.5 text-emerald-700 hover:bg-emerald-50 rounded-lg inline-block"
+                      title="Edit Formulation"
+                    >
+                      <Edit className="w-4.5 h-4.5" />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProduct(prod._id)}
+                      className="p-1.5 text-rose-600 hover:bg-rose-50 rounded-lg inline-block"
+                      title="Delete Formulation"
+                    >
+                      <Trash2 className="w-4.5 h-4.5" />
                     </button>
                   </td>
                 </tr>
@@ -166,26 +277,160 @@ const ProductsManager = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-stone-950/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-2xl space-y-4 relative">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="font-playfair text-lg font-bold">Add New Botanical Product</h3>
+              <h3 className="font-playfair text-lg font-bold">
+                {isEditing ? 'Edit Botanical Product' : 'Add New Botanical Product'}
+              </h3>
               <button onClick={() => setIsModalOpen(false)}><X className="w-5 h-5" /></button>
             </div>
-            <form onSubmit={handleCreateProduct} className="space-y-3 text-xs font-medium">
+            <form onSubmit={handleSaveProduct} className="space-y-3.5 text-xs font-medium">
               <div>
                 <label className="block text-stone-600 mb-1">Title</label>
-                <input type="text" required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="w-full bg-stone-50 border p-2.5 rounded-xl" />
+                <input
+                  type="text"
+                  required
+                  value={form.title}
+                  onChange={(e) => setForm({ ...form, title: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  placeholder="e.g. Rose & Vetiver Dew Drops Moisture Nectar"
+                />
               </div>
+
+              <div>
+                <label className="block text-stone-600 mb-1">Subtitle / Sub-header</label>
+                <input
+                  type="text"
+                  value={form.subtitle}
+                  onChange={(e) => setForm({ ...form, subtitle: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  placeholder="e.g. Hydrating Botanical Hydra-Gel Cream"
+                />
+              </div>
+
+              <div>
+                <label className="block text-stone-600 mb-1">Category</label>
+                <select
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl font-semibold focus:outline-none"
+                  required
+                >
+                  {categoriesList.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-stone-600 mb-1">Price (₹)</label>
-                  <input type="number" required value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full bg-stone-50 border p-2.5 rounded-xl" />
+                  <label className="block text-stone-600 mb-1">Original Price (₹)</label>
+                  <input
+                    type="number"
+                    required
+                    value={form.price}
+                    onChange={(e) => setForm({ ...form, price: e.target.value })}
+                    className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                    placeholder="e.g. 2200"
+                  />
                 </div>
                 <div>
-                  <label className="block text-stone-600 mb-1">Stock</label>
-                  <input type="number" required value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} className="w-full bg-stone-50 border p-2.5 rounded-xl" />
+                  <label className="block text-stone-600 mb-1">Discount Price (₹)</label>
+                  <input
+                    type="number"
+                    value={form.discountPrice}
+                    onChange={(e) => setForm({ ...form, discountPrice: e.target.value })}
+                    className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                    placeholder="e.g. 1890"
+                  />
                 </div>
               </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-stone-600 mb-1">Stock Quantity</label>
+                  <input
+                    type="number"
+                    required
+                    value={form.stock}
+                    onChange={(e) => setForm({ ...form, stock: e.target.value })}
+                    className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-stone-600 mb-1">Volume / Size Description</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.volume}
+                    onChange={(e) => setForm({ ...form, volume: e.target.value })}
+                    className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                    placeholder="e.g. 50ml / 1.7 fl oz"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-stone-600 mb-1">Rating (1.0 to 5.0)</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    min="1"
+                    max="5"
+                    required
+                    value={form.rating}
+                    onChange={(e) => setForm({ ...form, rating: e.target.value })}
+                    className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-stone-600 mb-1">Reviews Count</label>
+                  <input
+                    type="number"
+                    required
+                    value={form.numReviews}
+                    onChange={(e) => setForm({ ...form, numReviews: e.target.value })}
+                    className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <span className="block text-stone-600 mb-1">Tag Badges Overlay</span>
+                <div className="flex gap-4 py-1.5 flex-wrap">
+                  <label className="flex items-center gap-1.5 cursor-pointer text-stone-700">
+                    <input
+                      type="checkbox"
+                      checked={form.isBestSeller}
+                      onChange={(e) => setForm({ ...form, isBestSeller: e.target.checked })}
+                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-emerald-800"
+                    />
+                    <span>Best Seller Badge</span>
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer text-stone-700">
+                    <input
+                      type="checkbox"
+                      checked={form.isNewArrival}
+                      onChange={(e) => setForm({ ...form, isNewArrival: e.target.checked })}
+                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-emerald-800"
+                    />
+                    <span>New Arrival Badge</span>
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer text-stone-700">
+                    <input
+                      type="checkbox"
+                      checked={form.isFeatured}
+                      onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })}
+                      className="w-4 h-4 rounded text-primary focus:ring-primary accent-emerald-800"
+                    />
+                    <span>Featured Badge</span>
+                  </label>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-stone-600 font-semibold mb-1">
                   Product Image (Select from Gallery / Device)
@@ -223,11 +468,32 @@ const ProductsManager = () => {
                   )}
                 </div>
               </div>
+
+              <div>
+                <label className="block text-stone-600 mb-1">Ingredients (comma-separated)</label>
+                <input
+                  type="text"
+                  value={form.ingredients}
+                  onChange={(e) => setForm({ ...form, ingredients: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  placeholder="e.g. Saffron, Mysore Sandalwood Extract, Lotus Oil"
+                />
+              </div>
+
               <div>
                 <label className="block text-stone-600 mb-1">Description</label>
-                <textarea rows="3" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="w-full bg-stone-50 border p-2.5 rounded-xl" />
+                <textarea
+                  rows="3"
+                  value={form.description}
+                  onChange={(e) => setForm({ ...form, description: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  placeholder="Provide deep description of the item..."
+                />
               </div>
-              <button type="submit" className="w-full bg-emerald-900 text-white font-bold py-3 rounded-xl hover:bg-emerald-950">Save Formulation</button>
+
+              <button type="submit" className="w-full bg-emerald-900 text-white font-bold py-3 rounded-xl hover:bg-emerald-950">
+                {isEditing ? 'Update formulation' : 'Save Formulation'}
+              </button>
             </form>
           </div>
         </div>

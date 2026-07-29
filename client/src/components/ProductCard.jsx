@@ -149,11 +149,11 @@ const ProductCard = ({ product }) => {
         {/* Price & Add Button Row */}
         <div className="flex items-center justify-between pt-2 border-t border-stone-100 mt-1 gap-1">
           <div className="flex items-center gap-1 flex-wrap">
-            <span className="border border-stone-800 rounded-full px-2 sm:px-2.5 py-0.5 text-xs sm:text-sm font-bold text-stone-900">
+            <span className="border border-stone-800 rounded-full px-2 sm:px-2.5 py-0.5 text-xs sm:text-sm font-bold text-stone-900 font-sans">
               ₹{displayPrice.toLocaleString('en-IN')}
             </span>
             {hasDiscount && (
-              <span className="text-[10px] sm:text-xs text-stone-400 line-through">
+              <span className="text-[10px] sm:text-xs text-stone-400 line-through font-sans">
                 ₹{product.price.toLocaleString('en-IN')}
               </span>
             )}
