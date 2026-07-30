@@ -333,15 +333,7 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-2 gap-x-8 gap-y-8 items-center justify-items-center max-w-sm sm:max-w-md mx-auto">
-            <div className="flex flex-col items-center text-center space-y-2 group">
-              <img 
-                src={certIso9001} 
-                alt="ISO 9001:2015 Certification" 
-                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
-              />
-              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 9001:2015</span>
-            </div>
-            
+            {/* ROW 1: FSSAI & FDA */}
             <div className="flex flex-col items-center text-center space-y-2 group">
               <img 
                 src={certFssai} 
@@ -349,24 +341,6 @@ const Home = () => {
                 className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">FSSAI Authority</span>
-            </div>
-            
-            <div className="flex flex-col items-center text-center space-y-2 group">
-              <img 
-                src={certHaccp} 
-                alt="HACCP Certified Food Safety" 
-                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
-              />
-              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">HACCP Certified</span>
-            </div>
-            
-            <div className="flex flex-col items-center text-center space-y-2 group">
-              <img 
-                src={certIso22000} 
-                alt="ISO 22000:2018 Certification" 
-                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
-              />
-              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 22000:2018</span>
             </div>
 
             <div className="flex flex-col items-center text-center space-y-2 group">
@@ -376,6 +350,35 @@ const Home = () => {
                 className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">FDA Standards</span>
+            </div>
+            
+            {/* ROW 2: ISO & ISO */}
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certIso9001} 
+                alt="ISO 9001:2015 Certification" 
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 9001:2015</span>
+            </div>
+
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certIso22000} 
+                alt="ISO 22000:2018 Certification" 
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 22000:2018</span>
+            </div>
+            
+            {/* ROW 3: HACCP & Halal */}
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certHaccp} 
+                alt="HACCP Certified Food Safety" 
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">HACCP Certified</span>
             </div>
 
             <div className="flex flex-col items-center text-center space-y-2 group">
@@ -387,6 +390,7 @@ const Home = () => {
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">Halal Certified</span>
             </div>
 
+            {/* ROW 4: GMP (No changes) */}
             <div className="col-span-2 flex flex-col items-center text-center space-y-2 group">
               <img 
                 src={certGmp} 
