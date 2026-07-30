@@ -332,12 +332,12 @@ const Home = () => {
             </h3>
           </div>
           
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8 items-center justify-items-center max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-8 items-center justify-items-center max-w-sm sm:max-w-md mx-auto">
             <div className="flex flex-col items-center text-center space-y-2 group">
               <img 
                 src={certIso9001} 
                 alt="ISO 9001:2015 Certification" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 9001:2015</span>
             </div>
@@ -346,7 +346,7 @@ const Home = () => {
               <img 
                 src={certFssai} 
                 alt="FSSAI Food Safety Certification" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">FSSAI Authority</span>
             </div>
@@ -355,7 +355,7 @@ const Home = () => {
               <img 
                 src={certHaccp} 
                 alt="HACCP Certified Food Safety" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">HACCP Certified</span>
             </div>
@@ -364,7 +364,7 @@ const Home = () => {
               <img 
                 src={certIso22000} 
                 alt="ISO 22000:2018 Certification" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 22000:2018</span>
             </div>
@@ -373,7 +373,7 @@ const Home = () => {
               <img 
                 src={certFda} 
                 alt="FDA Quality Standards" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">FDA Standards</span>
             </div>
@@ -382,16 +382,16 @@ const Home = () => {
               <img 
                 src={certHalal} 
                 alt="Halal Certified" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108 font-bold"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108 font-bold"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">Halal Certified</span>
             </div>
 
-            <div className="flex flex-col items-center text-center space-y-2 group">
+            <div className="col-span-2 flex flex-col items-center text-center space-y-2 group">
               <img 
                 src={certGmp} 
                 alt="GMP Quality Product" 
-                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+                className="h-14 sm:h-16 w-auto object-contain transition-all duration-300 group-hover:scale-108"
               />
               <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">GMP Practice</span>
             </div>
