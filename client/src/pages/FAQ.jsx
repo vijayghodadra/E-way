@@ -7,7 +7,7 @@ const FAQ = () => {
 
   const faqs = [
     {
-      q: 'Are Élixir Botanicals products suitable for sensitive skin?',
+      q: 'Are Earthora products suitable for sensitive skin?',
       a: 'Yes. All our products are dermatologically certified, non-comedogenic, and completely free from synthetic fragrances, artificial colorants, and harsh parabens.'
     },
     {

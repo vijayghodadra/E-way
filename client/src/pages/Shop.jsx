@@ -71,7 +71,7 @@ const Shop = () => {
   return (
     <>
       <SEO
-        title="Botanical Collection | Élixir Store"
+        title="Botanical Collection | Earthora Store"
         description="Explore our full collection of bio-active serums, organic oils, and hair growth remedies."
       />
 

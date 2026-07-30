@@ -10,7 +10,7 @@ const Footer = () => {
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (email.trim()) {
-      toast.success('Welcome to Élixir Society! Check your inbox for your 15% luxury voucher.', {
+      toast.success('Welcome to Earthora Society! Check your inbox for your 15% luxury voucher.', {
         style: {
           background: '#14532D',
           color: '#FFFFFF',

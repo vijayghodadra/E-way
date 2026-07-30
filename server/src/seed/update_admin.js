@@ -13,21 +13,24 @@ const updateAdmin = async () => {
 
     let admin = await User.findOne({ role: 'admin' });
     if (!admin) {
+      admin = await User.findOne({ email: 'admin@Earthora.com' });
+    }
+    if (!admin) {
       admin = await User.findOne({ email: 'admin@elixirbotanicals.com' });
     }
 
     if (admin) {
-      admin.name = 'Earth Ora Admin Master';
-      admin.email = 'admin@Earthora.com';
-      admin.password = 'adminearthora';
+      admin.name = 'Earthora Admin Master';
+      admin.email = 'admin@earthora.com';
+      admin.password = 'adminearthora123';
       await admin.save();
       console.log('Admin user updated successfully.');
     } else {
       admin = await User.create({
-        name: 'Earth Ora Admin Master',
-        email: 'admin@Earthora.com',
+        name: 'Earthora Admin Master',
+        email: 'admin@earthora.com',
         role: 'admin',
-        password: 'adminearthora',
+        password: 'adminearthora123',
         phone: '+91 97777 55555'
       });
       console.log('Created fresh Admin user.');

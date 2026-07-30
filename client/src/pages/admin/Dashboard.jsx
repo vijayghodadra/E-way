@@ -40,7 +40,7 @@ const Dashboard = () => {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "Elixir_Sales_Report.csv");
+    link.setAttribute("download", "Earthora_Sales_Report.csv");
     document.body.appendChild(link);
     link.click();
     toast.success('Exported Sales Report to CSV!');

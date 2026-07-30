@@ -43,7 +43,7 @@ const Register = () => {
 
   return (
     <>
-      <SEO title="Create Account | Élixir Botanicals" />
+      <SEO title="Create Account | Earthora" />
 
       <div className="min-h-[80vh] flex items-center justify-center px-4 py-16 bg-secondary/40">
         <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-stone-200/80 shadow-luxury space-y-6">
@@ -51,7 +51,7 @@ const Register = () => {
             <span className="champagne-badge text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-flex items-center gap-1 mb-2">
               <Sparkles className="w-3 h-3" /> Exclusive Membership
             </span>
-            <h1 className="font-playfair text-2xl font-bold text-text">Join The Élixir Family</h1>
+            <h1 className="font-playfair text-2xl font-bold text-text">Join The Earthora Family</h1>
             <p className="text-xs text-stone-500 font-light mt-1">Unlock 15% off your first luxury order</p>
           </div>
 

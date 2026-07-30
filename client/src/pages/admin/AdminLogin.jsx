@@ -6,8 +6,8 @@ import axios from 'axios';
 import logo from '../../assets/logo.png';
 
 const AdminLogin = ({ setAdminToken }) => {
-  const [email, setEmail] = useState('admin@Earthora.com');
-  const [password, setPassword] = useState('adminearthora');
+  const [email, setEmail] = useState('admin@earthora.com');
+  const [password, setPassword] = useState('adminearthora123');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 

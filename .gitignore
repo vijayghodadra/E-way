@@ -40,3 +40,5 @@ Thumbs.db
 # Database data
 /data
 mongo_data/
+
+.vercel

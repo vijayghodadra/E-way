@@ -32,7 +32,7 @@ const PageLoader = () => (
   <div className="min-h-[60vh] flex flex-col items-center justify-center gap-3">
     <div className="w-10 h-10 border-3 border-stone-200 border-t-primary rounded-full animate-spin" />
     <span className="text-xs font-serif-luxury font-semibold text-primary tracking-widest uppercase animate-pulse">
-      Élixir Botanicals
+      Earthora
     </span>
   </div>
 );

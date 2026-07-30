@@ -93,7 +93,7 @@ const ProductDetails = () => {
           name: product.title,
           image: product.images,
           description: product.description,
-          brand: { '@type': 'Brand', name: 'Élixir Botanicals' },
+          brand: { '@type': 'Brand', name: 'Earthora' },
           offers: {
             '@type': 'Offer',
             priceCurrency: 'INR',

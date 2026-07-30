@@ -87,7 +87,7 @@ const Checkout = () => {
           key: razorRes.data.key,
           amount: razorRes.data.amount,
           currency: razorRes.data.currency,
-          name: 'Élixir Botanicals',
+          name: 'Earthora',
           description: `Order #${createdOrder._id.slice(-6)}`,
           image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=200',
           order_id: razorRes.data.razorpayOrderId,

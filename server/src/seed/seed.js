@@ -211,9 +211,9 @@ const seedDatabase = async () => {
 
     // 3. Seed Users (Admin & Customer)
     const adminUser = await User.create({
-      name: 'Earth Ora Admin Master',
-      email: 'admin@Earthora.com',
-      password: 'adminearthora',
+      name: 'Earthora Admin Master',
+      email: 'admin@earthora.com',
+      password: 'adminearthora123',
       role: 'admin',
       phone: '+91 98765 43210',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400',

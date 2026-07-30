@@ -37,7 +37,7 @@ const OrderSuccess = () => {
         </span>
 
         <h1 className="font-playfair text-3xl sm:text-4xl font-bold text-text mb-3">
-          Thank You For Choosing Élixir Botanicals
+          Thank You For Choosing Earthora
         </h1>
         <p className="text-xs sm:text-sm text-stone-500 max-w-md mx-auto mb-8 font-light">
           Your order <strong>#{id ? id.slice(-8).toUpperCase() : 'EB-9482'}</strong> has been received and is currently being hand-prepared by our master alchemists.
