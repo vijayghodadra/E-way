@@ -213,7 +213,7 @@ const seedDatabase = async () => {
     const adminUser = await User.create({
       name: 'Earthora Admin Master',
       email: 'admin@earthora.com',
-      password: 'adminearthora123',
+      password: 'admin@earthora123',
       role: 'admin',
       phone: '+91 98765 43210',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400',

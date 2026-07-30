@@ -11,32 +11,22 @@ const updateAdmin = async () => {
     await mongoose.connect(mongoUri);
     console.log('Connected to MongoDB...');
 
-    let admin = await User.findOne({ role: 'admin' });
-    if (!admin) {
-      admin = await User.findOne({ email: 'admin@Earthora.com' });
-    }
-    if (!admin) {
-      admin = await User.findOne({ email: 'admin@elixirbotanicals.com' });
-    }
+    // Delete any existing admins to make sure we remove the old admin clean
+    const deleteResult = await User.deleteMany({ role: 'admin' });
+    console.log('Deleted old admin(s):', deleteResult.deletedCount);
 
-    if (admin) {
-      admin.name = 'Earthora Admin Master';
-      admin.email = 'admin@earthora.com';
-      admin.password = 'adminearthora123';
-      await admin.save();
-      console.log('Admin user updated successfully.');
-    } else {
-      admin = await User.create({
-        name: 'Earthora Admin Master',
-        email: 'admin@earthora.com',
-        role: 'admin',
-        password: 'adminearthora123',
-        phone: '+91 97777 55555'
-      });
-      console.log('Created fresh Admin user.');
-    }
+    // Create the new admin with the requested credentials
+    const admin = await User.create({
+      name: 'Earthora Admin Master',
+      email: 'admin@earthora.com',
+      role: 'admin',
+      password: 'admin@earthora123',
+      phone: '+91 98765 43210'
+    });
+    console.log('Created new Admin user:', admin.email);
 
-    mongoose.disconnect();
+    await mongoose.disconnect();
+    console.log('Disconnected from MongoDB.');
     process.exit(0);
   } catch (error) {
     console.error('Update error:', error);
