@@ -22,6 +22,8 @@ const ProductsManager = () => {
     image: '',
     description: '',
     ingredients: '',
+    benefits: '',
+    howToUse: '',
     volume: '50ml / 1.7 fl oz',
     rating: 4.8,
     numReviews: 0,
@@ -97,6 +99,8 @@ const ProductsManager = () => {
       image: '',
       description: '',
       ingredients: '',
+      benefits: '',
+      howToUse: '',
       volume: '50ml / 1.7 fl oz',
       rating: 4.8,
       numReviews: 0,
@@ -120,6 +124,8 @@ const ProductsManager = () => {
       image: p.images?.[0] || '',
       description: p.description || '',
       ingredients: p.ingredients ? p.ingredients.join(', ') : '',
+      benefits: p.benefits ? p.benefits.join(', ') : '',
+      howToUse: p.howToUse || '',
       volume: p.volume || '50ml / 1.7 fl oz',
       rating: p.rating || 4.8,
       numReviews: p.numReviews || 0,
@@ -142,7 +148,9 @@ const ProductsManager = () => {
         rating: Number(form.rating || 4.8),
         numReviews: Number(form.numReviews || 0),
         images: [form.image || 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&q=80&w=800'],
-        ingredients: form.ingredients ? form.ingredients.split(',').map((i) => i.trim()).filter(Boolean) : []
+        ingredients: form.ingredients ? form.ingredients.split(',').map((i) => i.trim()).filter(Boolean) : [],
+        benefits: form.benefits ? form.benefits.split(',').map((b) => b.trim()).filter(Boolean) : [],
+        howToUse: form.howToUse
       };
 
       if (isEditing) {
@@ -481,6 +489,17 @@ const ProductsManager = () => {
               </div>
 
               <div>
+                <label className="block text-stone-600 mb-1">Benefits (comma-separated)</label>
+                <input
+                  type="text"
+                  value={form.benefits}
+                  onChange={(e) => setForm({ ...form, benefits: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  placeholder="e.g. Softens dry spots, Deep hydration, Enhances natural glow"
+                />
+              </div>
+
+              <div>
                 <label className="block text-stone-600 mb-1">Description</label>
                 <textarea
                   rows="3"
@@ -488,6 +507,17 @@ const ProductsManager = () => {
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
                   placeholder="Provide deep description of the item..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-stone-600 mb-1">How To Use</label>
+                <textarea
+                  rows="3"
+                  value={form.howToUse}
+                  onChange={(e) => setForm({ ...form, howToUse: e.target.value })}
+                  className="w-full bg-stone-50 border p-2.5 rounded-xl focus:ring-1 focus:ring-primary"
+                  placeholder="e.g. Apply liberally over damp body post-bath. Pay special attention to elbows, knees, and heels."
                 />
               </div>
 

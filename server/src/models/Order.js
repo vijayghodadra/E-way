@@ -21,6 +21,7 @@ const orderSchema = new mongoose.Schema(
       zipCode: { type: String, required: true },
       country: { type: String, default: 'India' }
     },
+    orderNumber: { type: String },
     paymentMethod: { type: String, required: true, enum: ['Razorpay', 'COD'] },
     paymentResult: {
       id: { type: String },

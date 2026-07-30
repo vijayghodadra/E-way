@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Package, ShoppingBag, Tag, LogOut, ShieldCheck, ArrowLeft } from 'lucide-react';
-import { Toaster } from 'react-hot-toast';
+
 
 import Dashboard from './Dashboard';
 import ProductsManager from './ProductsManager';
 import OrdersManager from './OrdersManager';
 import CouponsManager from './CouponsManager';
 import AdminLogin from './AdminLogin';
+import logo from '../../assets/logo.jpg';
 
 function AdminPortal() {
   const navigate = useNavigate();
@@ -34,15 +35,12 @@ function AdminPortal() {
 
   return (
     <div className="min-h-screen bg-stone-100 flex flex-col md:flex-row">
-      <Toaster position="top-right" />
 
       {/* Top Mobile Header */}
       <div className="md:hidden bg-stone-900 text-white p-4 flex items-center justify-between sticky top-0 z-30 shadow-md">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full bg-amber-400 text-stone-950 flex items-center justify-center font-bold text-xs">
-            C+
-          </div>
-          <span className="font-playfair font-bold text-sm text-white">Care+ Admin</span>
+          <img src={logo} alt="EarthOra Logo" className="h-7 object-contain brightness-0 invert" />
+          <span className="text-[10px] text-amber-305 font-bold uppercase tracking-wider pl-1">Admin Portal</span>
         </div>
         <Link to="/" className="text-xs text-amber-300 flex items-center gap-1">
           <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
@@ -52,14 +50,9 @@ function AdminPortal() {
       {/* Desktop Sidebar */}
       <aside className="w-64 bg-stone-900 text-white flex-col justify-between p-6 hidden md:flex shrink-0 min-h-screen sticky top-0">
         <div className="space-y-8">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-amber-400 text-stone-950 flex items-center justify-center font-playfair font-bold text-sm">
-              C+
-            </div>
-            <div>
-              <h2 className="font-playfair text-base font-bold text-white leading-none">CARE+</h2>
-              <span className="text-[9px] text-amber-300 tracking-widest uppercase font-bold">ADMIN PORTAL</span>
-            </div>
+          <div className="flex flex-col gap-2">
+            <img src={logo} alt="EarthOra Logo" className="h-10 object-contain self-start brightness-0 invert" />
+            <span className="text-[9px] text-amber-305 tracking-widest uppercase font-bold pl-1">ADMIN PORTAL</span>
           </div>
 
           <nav className="space-y-2 text-xs font-semibold">

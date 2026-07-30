@@ -3,9 +3,12 @@ import { Lock, Mail } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
+import logo from '../../assets/logo.png';
+
 const AdminLogin = ({ setAdminToken }) => {
-  const [email, setEmail] = useState('admin@elixirbotanicals.com');
-  const [password, setPassword] = useState('Admin@123456');
+  const [email, setEmail] = useState('admin@Earthora.com');
+  const [password, setPassword] = useState('adminearthora');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -32,10 +35,7 @@ const AdminLogin = ({ setAdminToken }) => {
     <div className="min-h-screen bg-stone-900 text-white flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-stone-800 rounded-3xl p-8 border border-stone-700 shadow-2xl space-y-6">
         <div className="text-center">
-          <div className="w-12 h-12 rounded-full bg-amber-400 text-stone-950 flex items-center justify-center mx-auto mb-3 font-bold text-base">
-            C+
-          </div>
-          <h1 className="font-playfair text-2xl font-bold">Care+ Executive Admin</h1>
+          <img src={logo} alt="Earth Ora Logo" className="h-10 object-contain mx-auto mb-3 brightness-0 invert" />
           <p className="text-xs text-stone-400 font-light mt-1">Management Portal & Inventory Control</p>
         </div>
 
@@ -58,13 +58,25 @@ const AdminLogin = ({ setAdminToken }) => {
             <label className="block text-stone-300 mb-1">Password</label>
             <div className="relative">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="w-full bg-stone-900 border border-stone-700 rounded-xl pl-10 pr-4 py-3 text-white focus:outline-none focus:border-amber-400"
               />
               <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+            </div>
+            <div className="flex items-center mt-2.5 pl-1">
+              <input 
+                type="checkbox" 
+                id="showPassword" 
+                checked={showPassword} 
+                onChange={(e) => setShowPassword(e.target.checked)}
+                className="w-3.5 h-3.5 rounded border-stone-700 bg-stone-900 text-amber-400 focus:ring-amber-400 focus:ring-offset-stone-850"
+              />
+              <label htmlFor="showPassword" className="text-[11px] text-stone-400 ml-2 select-none cursor-pointer">
+                Show Password
+              </label>
             </div>
           </div>
 

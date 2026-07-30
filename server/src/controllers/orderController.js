@@ -18,11 +18,22 @@ const createOrder = async (req, res, next) => {
     const shippingPrice = itemsPrice >= 1499 ? 0 : 99; // Free shipping over ₹1499
     const totalPrice = Math.max(0, itemsPrice + taxPrice + shippingPrice - discountAmount);
 
+    // Generate friendly order number like #001abc
+    const count = await Order.countDocuments();
+    const num = String(count + 1).padStart(3, '0');
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    let randomLetters = '';
+    for (let i = 0; i < 3; i++) {
+      randomLetters += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    const orderNumber = `#${num}${randomLetters}`;
+
     const order = new Order({
       user: req.user._id,
       orderItems,
       shippingAddress,
       paymentMethod,
+      orderNumber,
       itemsPrice,
       taxPrice,
       shippingPrice,
@@ -147,7 +158,19 @@ const getMyOrders = async (req, res, next) => {
 // @route GET /api/v1/orders/:id
 const getOrderById = async (req, res, next) => {
   try {
-    const order = await Order.findById(req.params.id).populate('user', 'name email phone');
+    const id = req.params.id.trim();
+    let order;
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+      order = await Order.findById(id).populate('user', 'name email phone');
+    } else {
+      order = await Order.findOne({
+        $or: [
+          { orderNumber: id },
+          { orderNumber: `#${id}` },
+          { orderNumber: id.startsWith('#') ? id : `#${id}` }
+        ]
+      }).populate('user', 'name email phone');
+    }
     if (!order) {
       return res.status(404).json({ success: false, message: 'Order not found' });
     }

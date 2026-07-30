@@ -90,7 +90,9 @@ const TrackOrder = () => {
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-stone-100">
               <div>
                 <span className="text-xs text-stone-400 font-medium">Order ID</span>
-                <h3 className="font-playfair text-xl font-bold text-text">#{order._id}</h3>
+                <h3 className="font-playfair text-xl font-bold text-text">
+                  {order.orderNumber || `#${order._id.slice(-6)}`}
+                </h3>
               </div>
               <div>
                 <span className="text-xs text-stone-400 font-medium">Carrier</span>

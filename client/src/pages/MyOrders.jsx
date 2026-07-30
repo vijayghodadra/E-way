@@ -61,7 +61,9 @@ const MyOrders = () => {
                 <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-stone-100">
                   <div>
                     <span className="text-[11px] text-stone-400 font-medium">Order Reference</span>
-                    <h4 className="font-playfair text-base font-bold text-text">#{order._id}</h4>
+                    <h4 className="font-playfair text-base font-bold text-text">
+                      {order.orderNumber || `#${order._id.slice(-6)}`}
+                    </h4>
                   </div>
                   <div>
                     <span className="text-[11px] text-stone-400 font-medium">Date</span>

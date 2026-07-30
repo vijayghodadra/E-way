@@ -36,7 +36,7 @@ const Dashboard = () => {
 
   const handleExportCSV = () => {
     const csvContent = "data:text/csv;charset=utf-8,Order_ID,Customer,Amount,Status\n"
-      + data?.recentOrders?.map(o => `${o._id},${o.user?.name || 'Customer'},₹${o.totalPrice},${o.orderStatus}`).join("\n");
+      + data?.recentOrders?.map(o => `${o.orderNumber || o._id},${o.user?.name || 'Customer'},₹${o.totalPrice},${o.orderStatus}`).join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -132,7 +132,9 @@ const Dashboard = () => {
             <tbody className="divide-y divide-stone-100 font-medium">
               {data?.recentOrders?.map((ord) => (
                 <tr key={ord._id} className="hover:bg-stone-50">
-                  <td className="py-3 px-4 font-bold text-emerald-900">#{ord._id}</td>
+                  <td className="py-3 px-4 font-bold text-emerald-900">
+                    {ord.orderNumber || `#${ord._id.slice(-6)}`}
+                  </td>
                   <td className="py-3 px-4">{ord.user?.name || 'Customer'}</td>
                   <td className="py-3 px-4 font-bold">₹{ord.totalPrice?.toLocaleString('en-IN')}</td>
                   <td className="py-3 px-4">

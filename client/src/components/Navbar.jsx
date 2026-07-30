@@ -19,6 +19,7 @@ import { toggleCart, setSearchOpen, toggleMobileMenu } from '../store/slices/uiS
 import { logout } from '../store/slices/authSlice';
 import MegaMenu from './MegaMenu';
 import { fetchCategoriesAPI } from '../api/queries';
+import logo from '../assets/logo.jpg';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -85,17 +86,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-full bg-primary text-accent flex items-center justify-center font-serif-luxury font-bold text-[15px] group-hover:scale-105 transition-transform">
-              C+
-            </div>
-            <div className="flex flex-col">
-              <span className="font-playfair text-xl font-bold tracking-tight text-primary uppercase">
-                CARE+
-              </span>
-              <span className="text-[9px] font-semibold tracking-widest text-accent uppercase -mt-1">
-                LUXURY BEAUTY
-              </span>
-            </div>
+            <img src={logo} alt="EarthOra Logo" className="h-10 object-contain" />
           </Link>
 
           {/* Desktop Nav Links */}
@@ -283,10 +274,7 @@ const Navbar = () => {
               <div>
                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-stone-100">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary text-accent flex items-center justify-center font-serif-luxury font-bold text-sm">
-                      C+
-                    </div>
-                    <span className="font-playfair text-lg font-bold text-primary">Care+</span>
+                    <img src={logo} alt="EarthOra Logo" className="h-8 object-contain" />
                   </div>
                   <button
                     onClick={() => dispatch(toggleMobileMenu())}

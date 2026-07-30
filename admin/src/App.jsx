@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Package, ShoppingBag, Tag, LogOut, ShieldCheck } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
+import logo from './assets/logo.jpg';
 
 import Dashboard from './pages/Dashboard';
 import ProductsManager from './pages/ProductsManager';
@@ -39,14 +40,9 @@ function App() {
       {/* Admin Sidebar */}
       <aside className="w-64 bg-stone-900 text-white flex flex-col justify-between p-6 hidden md:flex">
         <div className="space-y-8">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-full bg-accent text-stone-950 flex items-center justify-center font-bold text-sm">
-              C+
-            </div>
-            <div>
-              <h2 className="text-base font-bold text-white leading-none">CARE+</h2>
-              <span className="text-[9px] text-accent tracking-widest uppercase font-bold">ADMIN PORTAL</span>
-            </div>
+          <div className="flex flex-col gap-2">
+            <img src={logo} alt="EarthOra Logo" className="h-10 object-contain self-start brightness-0 invert" />
+            <span className="text-[9px] text-accent tracking-widest uppercase font-bold pl-1">ADMIN PORTAL</span>
           </div>
 
           <nav className="space-y-1.5 text-xs font-semibold">

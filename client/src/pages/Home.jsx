@@ -8,6 +8,14 @@ import SEO from '../components/SEO';
 import TestimonialSlider from '../components/TestimonialSlider';
 import { fetchProductsAPI, fetchCategoriesAPI } from '../api/queries';
 
+import certIso9001 from '../assets/cert-iso9001.png';
+import certFssai from '../assets/cert-fssai.png';
+import certHaccp from '../assets/cert-haccp.png';
+import certIso22000 from '../assets/cert-iso22000.png';
+import certFda from '../assets/cert-fda.png';
+import certHalal from '../assets/cert-halal.png';
+import certGmp from '../assets/cert-gmp.png';
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -308,6 +316,85 @@ const Home = () => {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Our Certifications Showcase */}
+      <section className="py-14 bg-stone-50 border-y border-stone-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 max-w-xl mx-auto">
+            <span className="text-[10px] font-bold tracking-widest text-[#475432] uppercase mb-1 block">
+              Safety & Purity Standards
+            </span>
+            <h3 className="font-playfair text-xl sm:text-2xl font-bold text-stone-800">
+              100% Certified Clean Formulations
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8 items-center justify-items-center max-w-6xl mx-auto">
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certIso9001} 
+                alt="ISO 9001:2015 Certification" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 9001:2015</span>
+            </div>
+            
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certFssai} 
+                alt="FSSAI Food Safety Certification" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">FSSAI Authority</span>
+            </div>
+            
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certHaccp} 
+                alt="HACCP Certified Food Safety" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">HACCP Certified</span>
+            </div>
+            
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certIso22000} 
+                alt="ISO 22000:2018 Certification" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">ISO 22000:2018</span>
+            </div>
+
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certFda} 
+                alt="FDA Quality Standards" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">FDA Standards</span>
+            </div>
+
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certHalal} 
+                alt="Halal Certified" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108 font-bold"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">Halal Certified</span>
+            </div>
+
+            <div className="flex flex-col items-center text-center space-y-2 group">
+              <img 
+                src={certGmp} 
+                alt="GMP Quality Product" 
+                className="h-14 sm:h-18 w-auto object-contain transition-all duration-300 group-hover:scale-108"
+              />
+              <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium tracking-wide">GMP Practice</span>
+            </div>
           </div>
         </div>
       </section>

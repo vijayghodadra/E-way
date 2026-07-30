@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Mail, ArrowRight, ShieldCheck, Truck, RefreshCw, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -74,12 +75,7 @@ const Footer = () => {
         {/* Brand Column */}
         <div className="md:col-span-4 space-y-4">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-accent text-stone-950 flex items-center justify-center font-serif-luxury font-bold text-lg">
-              C+
-            </div>
-            <span className="font-playfair text-2xl font-bold tracking-tight text-white uppercase">
-              CARE+
-            </span>
+            <img src={logo} alt="EarthOra Logo" className="h-10 object-contain brightness-0 invert" />
           </Link>
           <p className="text-xs text-stone-400 leading-relaxed max-w-sm">
             Harnessing age-old Ayurvedic wisdom and bio-active botanical extractions to create transformative, non-toxic luxury skincare remedies.
@@ -121,7 +117,7 @@ const Footer = () => {
         {/* Column 4: Newsletter */}
         <div className="md:col-span-4">
           <h4 className="font-playfair text-sm font-semibold text-white uppercase tracking-wider mb-2">
-            Join The Care+ Club
+            Join The EarthOra Club
           </h4>
           <p className="text-xs text-stone-400 leading-relaxed mb-4">
             Receive exclusive access to private botanical drops, seasonal rituals, and 15% off your first order.
@@ -150,7 +146,7 @@ const Footer = () => {
 
       {/* Bottom Bar: Copyright & Payment Badges */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
-        <p>© {new Date().getFullYear()} Care+. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} EarthOra. All rights reserved.</p>
         <div className="flex items-center gap-4 text-stone-300 font-semibold text-[11px]">
           <span className="bg-white/10 px-2.5 py-1 rounded">Razorpay Verified</span>
           <span className="bg-white/10 px-2.5 py-1 rounded">UPI</span>
