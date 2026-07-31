@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ShieldCheck, Lock, CreditCard, Banknote, Truck, ArrowRight, Check } from 'lucide-react';
-import { clearCart } from '../store/slices/cartSlice';
+import { ShieldCheck, Lock, CreditCard, Banknote, Truck, ArrowRight, Check, Tag } from 'lucide-react';
+import { clearCart, applyCoupon, removeCoupon } from '../store/slices/cartSlice';
 import SEO from '../components/SEO';
 import toast from 'react-hot-toast';
 import api from '../api/axios';
@@ -28,6 +28,9 @@ const Checkout = () => {
     country: 'India'
   });
 
+  const [couponInput, setCouponInput] = useState('');
+  const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
+
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const discountAmount = coupon ? coupon.discountAmount : 0;
   const taxPrice = 0; // Removed GST
@@ -36,6 +39,37 @@ const Checkout = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleApplyCoupon = async (e) => {
+    e.preventDefault();
+    if (!couponInput.trim()) return;
+
+    setIsValidatingCoupon(true);
+    try {
+      const res = await api.post('/coupons/validate', {
+        code: couponInput.trim(),
+        cartTotal: subtotal
+      });
+
+      if (res.data.success) {
+        dispatch(
+          applyCoupon({
+            code: res.data.code,
+            discountAmount: res.data.discountAmount,
+            discountType: res.data.discountType,
+            discountValue: res.data.discountValue
+          })
+        );
+        toast.success(res.data.message);
+        setCouponInput('');
+      }
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Invalid coupon code';
+      toast.error(msg);
+    } finally {
+      setIsValidatingCoupon(false);
+    }
   };
 
   const handlePlaceOrder = async (e) => {
@@ -346,6 +380,43 @@ const Checkout = () => {
                   <span>Total Amount</span>
                   <span className="font-sans">₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
+              </div>
+
+              {/* Coupon Code Section */}
+              <div className="border-t border-stone-100 pt-2.5">
+                {coupon ? (
+                  <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-2xl text-[11px] font-semibold">
+                    <div className="flex items-center gap-2">
+                       <Tag className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                       <span>Coupon <strong>{coupon.code}</strong> applied (-₹{coupon.discountAmount})</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => dispatch(removeCoupon())}
+                      className="text-[11px] text-rose-600 hover:underline font-bold shrink-0 ml-1"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={couponInput}
+                      onChange={(e) => setCouponInput(e.target.value)}
+                      placeholder="Coupon Code (e.g. WELCOME500)"
+                      className="flex-1 bg-stone-50 text-xs px-3.5 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-1 focus:ring-primary font-medium"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleApplyCoupon}
+                      disabled={isValidatingCoupon}
+                      className="bg-stone-900 text-white text-xs font-semibold px-4 py-3 rounded-xl hover:bg-primary transition-colors disabled:opacity-50"
+                    >
+                      {isValidatingCoupon ? '...' : 'Apply'}
+                    </button>
+                  </div>
+                )}
               </div>
 
               <button
