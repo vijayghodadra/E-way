@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   items: [],
   coupon: null, // { code, discountAmount, discountType, discountValue }
-  freeShippingThreshold: 1499,
+  freeShippingThreshold: 499,
 };
 
 const cartSlice = createSlice({

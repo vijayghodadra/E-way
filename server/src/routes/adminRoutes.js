@@ -7,7 +7,8 @@ const {
   deleteProduct,
   getAllOrders,
   updateOrderStatus,
-  createCoupon
+  createCoupon,
+  updateOrderDetails
 } = require('../controllers/adminController');
 const { protect, adminOnly } = require('../middleware/auth');
 
@@ -19,6 +20,7 @@ router.put('/products/:id', updateProduct);
 router.delete('/products/:id', deleteProduct);
 router.get('/orders', getAllOrders);
 router.put('/orders/:id/status', updateOrderStatus);
+router.put('/orders/:id', updateOrderDetails);
 router.post('/coupons', createCoupon);
 
 module.exports = router;

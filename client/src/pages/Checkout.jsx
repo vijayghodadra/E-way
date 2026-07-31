@@ -30,9 +30,9 @@ const Checkout = () => {
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const discountAmount = coupon ? coupon.discountAmount : 0;
-  const taxPrice = Math.round(subtotal * 0.05);
-  const shippingPrice = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 99;
-  const totalPrice = Math.max(0, subtotal - discountAmount + taxPrice + shippingPrice);
+  const taxPrice = 0; // Removed GST
+  const shippingPrice = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 60;
+  const totalPrice = Math.max(0, subtotal - discountAmount + shippingPrice);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -331,10 +331,7 @@ const Checkout = () => {
                     <span className="font-sans">-₹{discountAmount.toLocaleString('en-IN')}</span>
                   </div>
                 )}
-                <div className="flex justify-between">
-                  <span>Estimated GST (5%)</span>
-                  <span className="font-sans">₹{taxPrice.toLocaleString('en-IN')}</span>
-                </div>
+
                 <div className="flex justify-between">
                   <span>Shipping Fee</span>
                   <span className="font-sans">{shippingPrice === 0 ? <strong className="text-emerald-600 font-sans">FREE</strong> : `₹${shippingPrice}`}</span>

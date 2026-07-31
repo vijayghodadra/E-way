@@ -3,11 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import { CheckCircle2, Package, ArrowRight, Printer, Sparkles } from 'lucide-react';
 import SEO from '../components/SEO';
 import api from '../api/axios';
+import InvoiceModal from '../components/InvoiceModal';
 
 const OrderSuccess = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -51,6 +53,12 @@ const OrderSuccess = () => {
           >
             <Package className="w-4 h-4" /> Track Order Status
           </Link>
+          <button
+            onClick={() => setIsInvoiceOpen(true)}
+            className="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold px-6 py-3.5 rounded-2xl transition-all flex items-center gap-2 shadow-luxury"
+          >
+            <Printer className="w-4 h-4" /> View & Print Invoice
+          </button>
           <Link
             to="/shop"
             className="bg-stone-100 text-stone-700 text-xs font-semibold px-6 py-3.5 rounded-2xl hover:bg-stone-200 transition-all flex items-center gap-2"
@@ -59,6 +67,12 @@ const OrderSuccess = () => {
           </Link>
         </div>
       </div>
+
+      <InvoiceModal 
+        isOpen={isInvoiceOpen} 
+        onClose={() => setIsInvoiceOpen(false)} 
+        order={order} 
+      />
     </>
   );
 };

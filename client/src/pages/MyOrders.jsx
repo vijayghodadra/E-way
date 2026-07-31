@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, ExternalLink, FileText, CheckCircle2 } from 'lucide-react';
+import { Package, ExternalLink, FileText, CheckCircle2, Printer } from 'lucide-react';
 import SEO from '../components/SEO';
 import api from '../api/axios';
+import InvoiceModal from '../components/InvoiceModal';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -21,6 +24,11 @@ const MyOrders = () => {
     };
     fetchOrders();
   }, []);
+
+  const handleViewInvoice = (order) => {
+    setSelectedOrder(order);
+    setIsInvoiceOpen(true);
+  };
 
   return (
     <>
@@ -100,6 +108,12 @@ const MyOrders = () => {
                 </div>
 
                 <div className="flex justify-end gap-3 pt-2">
+                  <button
+                    onClick={() => handleViewInvoice(order)}
+                    className="bg-stone-100 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1 hover:bg-stone-200"
+                  >
+                    <FileText className="w-3.5 h-3.5" /> View Invoice
+                  </button>
                   <Link
                     to={`/track-order?id=${order._id}`}
                     className="bg-primary text-white text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1 hover:bg-primary-dark"
@@ -112,6 +126,15 @@ const MyOrders = () => {
           </div>
         )}
       </div>
+
+      <InvoiceModal
+        isOpen={isInvoiceOpen}
+        onClose={() => {
+          setIsInvoiceOpen(false);
+          setSelectedOrder(null);
+        }}
+        order={selectedOrder}
+      />
     </>
   );
 };

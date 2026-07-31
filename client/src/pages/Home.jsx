@@ -332,7 +332,7 @@ const Home = () => {
             </h3>
           </div>
           
-          <div className="grid grid-cols-2 gap-x-8 gap-y-8 items-center justify-items-center max-w-sm sm:max-w-md mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-7 gap-x-8 gap-y-8 items-center justify-items-center max-w-sm sm:max-w-md md:max-w-6xl mx-auto">
             {/* ROW 1: FSSAI & FDA */}
             <div className="flex flex-col items-center text-center space-y-2 group">
               <img 
@@ -391,7 +391,7 @@ const Home = () => {
             </div>
 
             {/* ROW 4: GMP (No changes) */}
-            <div className="col-span-2 flex flex-col items-center text-center space-y-2 group">
+            <div className="col-span-2 md:col-span-1 flex flex-col items-center text-center space-y-2 group">
               <img 
                 src={certGmp} 
                 alt="GMP Quality Product" 

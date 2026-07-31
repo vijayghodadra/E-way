@@ -190,6 +190,35 @@ const createCoupon = async (req, res, next) => {
   }
 };
 
+// @desc Edit Order Details (Admin)
+// @route PUT /api/v1/admin/orders/:id
+const updateOrderDetails = async (req, res, next) => {
+  try {
+    const { shippingAddress } = req.body;
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+
+    if (shippingAddress) {
+      order.shippingAddress = {
+        ...order.shippingAddress.toObject(),
+        ...shippingAddress
+      };
+    }
+
+    await order.save();
+    
+    // Populate user to match expected formats
+    const updatedOrder = await Order.findById(order._id).populate('user', 'name email phone');
+    
+    res.json({ success: true, message: 'Order details updated successfully', order: updatedOrder });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAnalytics,
   createProduct,
@@ -197,5 +226,6 @@ module.exports = {
   deleteProduct,
   getAllOrders,
   updateOrderStatus,
-  createCoupon
+  createCoupon,
+  updateOrderDetails
 };
