@@ -41,6 +41,12 @@ const Checkout = () => {
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
+    if (!isAuthenticated || !user) {
+      toast.error('Please sign in to place/pay for your order.', { id: 'auth-required' });
+      navigate('/login?redirect=checkout');
+      return;
+    }
+
     if (items.length === 0) {
       toast.error('Your cart is empty');
       return;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Mail, Lock, ArrowRight, Sparkles } from 'lucide-react';
 import { setCredentials } from '../store/slices/authSlice';
@@ -10,10 +10,14 @@ import api from '../api/axios';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const queryParams = new URLSearchParams(location.search);
+  const redirectPath = queryParams.get('redirect') || '/';
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +27,7 @@ const Login = () => {
       if (res.data.success) {
         dispatch(setCredentials({ user: res.data.user, token: res.data.token }));
         toast.success(`Welcome back, ${res.data.user.name}!`, { icon: '🌿' });
-        navigate('/');
+        navigate(redirectPath);
       }
     } catch (error) {
       const msg = error.response?.data?.message || 'Invalid email or password';
@@ -89,7 +93,7 @@ const Login = () => {
 
           <div className="text-center text-xs text-stone-500 font-medium">
             Don't have an account?{' '}
-            <Link to="/register" className="text-primary font-bold hover:underline">
+            <Link to={`/register?redirect=${encodeURIComponent(redirectPath)}`} className="text-primary font-bold hover:underline">
               Register Now
             </Link>
           </div>

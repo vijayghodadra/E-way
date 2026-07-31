@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { User, Mail, Lock, Phone, ArrowRight, Sparkles } from 'lucide-react';
 import { setCredentials } from '../store/slices/authSlice';
@@ -10,6 +10,7 @@ import api from '../api/axios';
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -18,6 +19,9 @@ const Register = () => {
     password: ''
   });
   const [loading, setLoading] = useState(false);
+
+  const queryParams = new URLSearchParams(location.search);
+  const redirectPath = queryParams.get('redirect') || '/';
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +35,7 @@ const Register = () => {
       if (res.data.success) {
         dispatch(setCredentials({ user: res.data.user, token: res.data.token }));
         toast.success('Account created successfully!', { icon: '🌿' });
-        navigate('/');
+        navigate(redirectPath);
       }
     } catch (error) {
       const msg = error.response?.data?.message || 'Registration failed';
@@ -132,7 +136,7 @@ const Register = () => {
 
           <div className="text-center text-xs text-stone-500 font-medium">
             Already registered?{' '}
-            <Link to="/login" className="text-primary font-bold hover:underline">
+            <Link to={`/login?redirect=${encodeURIComponent(redirectPath)}`} className="text-primary font-bold hover:underline">
               Sign In
             </Link>
           </div>
