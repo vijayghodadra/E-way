@@ -313,18 +313,33 @@ const OrdersManager = () => {
               #admin-print-invoice, #admin-print-invoice * {
                 visibility: visible !important;
               }
+              /* Reset layout height limits on modal ancestors to allow multi-page printing */
+              html, body, #root, .fixed.inset-0, .relative.bg-white, .flex-1.overflow-y-auto {
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                position: static !important;
+                visibility: visible !important;
+              }
               #admin-print-invoice {
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
                 width: 100% !important;
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
                 background: white !important;
                 color: black !important;
                 box-shadow: none !important;
                 border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                visibility: visible !important;
               }
               .no-print {
                 display: none !important;
+                visibility: hidden !important;
               }
             }
           `}</style>
