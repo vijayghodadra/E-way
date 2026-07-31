@@ -15,7 +15,7 @@ const createOrder = async (req, res, next) => {
 
     const itemsPrice = orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const taxPrice = 0; // GST Tax removed
-    const shippingPrice = itemsPrice >= 499 ? 0 : 60; // Free shipping above ₹499, else ₹60
+    const shippingPrice = itemsPrice >= 1499 ? 0 : 80; // Free shipping above ₹1499, else ₹80
     const totalPrice = Math.max(0, itemsPrice + shippingPrice - discountAmount);
 
     // Generate friendly order number like #001abc

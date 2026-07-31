@@ -22,7 +22,7 @@ const CartDrawer = () => {
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discountAmount = coupon ? coupon.discountAmount : 0;
-  const shippingFee = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 60;
+  const shippingFee = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 80;
   const estimatedTotal = Math.max(0, subtotal - discountAmount + shippingFee);
 
   const freeShippingProgress = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));

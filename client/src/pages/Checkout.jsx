@@ -31,7 +31,7 @@ const Checkout = () => {
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const discountAmount = coupon ? coupon.discountAmount : 0;
   const taxPrice = 0; // Removed GST
-  const shippingPrice = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 60;
+  const shippingPrice = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 80;
   const totalPrice = Math.max(0, subtotal - discountAmount + shippingPrice);
 
   const handleChange = (e) => {
