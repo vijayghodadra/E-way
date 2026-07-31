@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Mail, Lock, ArrowRight, Sparkles } from 'lucide-react';
 import { setCredentials } from '../store/slices/authSlice';
 import SEO from '../components/SEO';
@@ -12,12 +12,20 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const queryParams = new URLSearchParams(location.search);
   const redirectPath = queryParams.get('redirect') || '/';
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(redirectPath, { replace: true });
+    }
+  }, [isAuthenticated, navigate, redirectPath]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

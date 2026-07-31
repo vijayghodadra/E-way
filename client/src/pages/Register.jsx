@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { User, Mail, Lock, Phone, ArrowRight, Sparkles } from 'lucide-react';
 import { setCredentials } from '../store/slices/authSlice';
 import SEO from '../components/SEO';
@@ -12,6 +12,8 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,6 +24,12 @@ const Register = () => {
 
   const queryParams = new URLSearchParams(location.search);
   const redirectPath = queryParams.get('redirect') || '/';
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(redirectPath, { replace: true });
+    }
+  }, [isAuthenticated, navigate, redirectPath]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

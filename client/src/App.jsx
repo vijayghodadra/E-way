@@ -8,6 +8,7 @@ import CartDrawer from './components/CartDrawer';
 import QuickViewModal from './components/QuickViewModal';
 import SearchModal from './components/SearchModal';
 import ScrollToTop from './components/ScrollToTop';
+import PrivateRoute from './components/PrivateRoute';
 
 // Route Code Splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -66,14 +67,30 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/product/:slug" element={<ProductDetails />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/order-success/:id" element={<OrderSuccess />} />
+            <Route path="/checkout" element={
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            } />
+            <Route path="/order-success/:id" element={
+              <PrivateRoute>
+                <OrderSuccess />
+              </PrivateRoute>
+            } />
             <Route path="/track-order" element={<TrackOrder />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/my-profile" element={<MyProfile />} />
-            <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/my-profile" element={
+              <PrivateRoute>
+                <MyProfile />
+              </PrivateRoute>
+            } />
+            <Route path="/my-orders" element={
+              <PrivateRoute>
+                <MyOrders />
+              </PrivateRoute>
+            } />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
