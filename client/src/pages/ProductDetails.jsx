@@ -237,36 +237,38 @@ const ProductDetails = () => {
 
             {/* Quantity Selector & Action Buttons */}
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center border border-stone-200 rounded-2xl bg-stone-50 p-1">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex items-center justify-between sm:justify-start border border-stone-200 rounded-2xl bg-stone-50 p-1 w-full sm:w-auto">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 flex items-center justify-center font-bold text-stone-600 hover:text-primary"
+                    className="w-12 h-12 flex items-center justify-center font-bold text-stone-600 hover:text-primary"
                   >
                     -
                   </button>
-                  <span className="w-10 text-center font-semibold text-sm">{quantity}</span>
+                  <span className="w-12 text-center font-semibold text-sm">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 flex items-center justify-center font-bold text-stone-600 hover:text-primary"
+                    className="w-12 h-12 flex items-center justify-center font-bold text-stone-600 hover:text-primary"
                   >
                     +
                   </button>
                 </div>
 
-                <button
-                  onClick={handleAddToCart}
-                  className="flex-1 bg-primary text-white text-sm font-semibold py-4 rounded-2xl hover:bg-primary-dark transition-all shadow-luxury flex items-center justify-center gap-2"
-                >
-                  <ShoppingBag className="w-4 h-4" /> Add To Bag
-                </button>
+                <div className="grid grid-cols-2 sm:flex sm:flex-1 gap-3">
+                  <button
+                    onClick={handleAddToCart}
+                    className="sm:flex-1 bg-primary text-white text-sm font-semibold py-4 rounded-2xl hover:bg-primary-dark transition-all shadow-luxury flex items-center justify-center gap-2 min-h-[52px]"
+                  >
+                    <ShoppingBag className="w-4 h-4" /> Add to Cart
+                  </button>
 
-                <button
-                  onClick={handleBuyNow}
-                  className="bg-accent text-stone-950 text-sm font-semibold px-6 py-4 rounded-2xl hover:bg-accent-light transition-all shadow-gold"
-                >
-                  Buy Now
-                </button>
+                  <button
+                    onClick={handleBuyNow}
+                    className="sm:flex-1 bg-accent text-stone-950 text-sm font-semibold px-4 sm:px-6 py-4 rounded-2xl hover:bg-accent-light transition-all shadow-gold min-h-[52px] text-center"
+                  >
+                    Buy Now
+                  </button>
+                </div>
               </div>
 
               {/* Guarantees */}

@@ -51,7 +51,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-8 pb-16 md:pb-0">
       {/* Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-stone-900">Executive Performance Dashboard</h1>
           <p className="text-xs text-stone-500 font-medium">Real-time revenue metrics, sales volume, and order activity.</p>
@@ -59,7 +59,7 @@ const Dashboard = () => {
 
         <button
           onClick={handleExportCSV}
-          className="bg-emerald-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl hover:bg-emerald-950 transition-all flex items-center gap-1.5 shadow-sm"
+          className="w-full sm:w-auto bg-emerald-900 text-white text-xs font-semibold px-4 py-2.5 rounded-xl hover:bg-emerald-950 transition-all flex items-center justify-center gap-1.5 shadow-sm"
         >
           <Download className="w-4 h-4" /> Export Sales CSV
         </button>

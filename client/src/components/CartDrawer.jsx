@@ -90,7 +90,7 @@ const CartDrawer = () => {
           <div className="p-6 border-b border-stone-100 flex items-center justify-between bg-stone-50/50">
             <div className="flex items-center gap-2 text-primary font-semibold">
               <ShoppingBag className="w-5 h-5" />
-              <span className="font-playfair text-lg">Your Botanical Bag</span>
+              <span className="font-playfair text-lg">Your Botanical Cart</span>
               <span className="text-xs bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">
                 {items.length} items
               </span>
@@ -132,7 +132,7 @@ const CartDrawer = () => {
                   <ShoppingBag className="w-8 h-8" />
                 </div>
                 <h4 className="font-playfair text-lg font-semibold text-text mb-1">
-                  Your bag is currently empty
+                  Your cart is currently empty
                 </h4>
                 <p className="text-xs text-muted max-w-xs mb-6">
                   Explore our luxury botanical serums, cold-pressed oils, and herbal hair elixirs.

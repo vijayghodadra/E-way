@@ -195,7 +195,7 @@ const ProductsManager = () => {
 
   return (
     <div className="space-y-6 pb-16 md:pb-0">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-stone-900">Products & Inventory Control</h1>
           <p className="text-xs text-stone-500 font-medium">Manage formulations, pricing, stock levels, and store listings.</p>
@@ -203,7 +203,7 @@ const ProductsManager = () => {
 
         <button
           onClick={handleAddNewClick}
-          className="bg-amber-400 text-stone-950 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-amber-300 transition-all flex items-center gap-1.5 shadow-sm"
+          className="w-full sm:w-auto bg-amber-400 text-stone-950 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-amber-300 transition-all flex items-center justify-center gap-1.5 shadow-sm"
         >
           <Plus className="w-4 h-4" /> Add New Formulation
         </button>

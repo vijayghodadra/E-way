@@ -195,7 +195,7 @@ const ProductsManager = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-stone-900 font-sans">Inventory & Product Manager</h1>
           <p className="text-xs text-stone-500 font-medium">Create, edit, and control luxury store items.</p>
@@ -203,7 +203,7 @@ const ProductsManager = () => {
 
         <button
           onClick={handleAddNewClick}
-          className="bg-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl hover:bg-primary-dark transition-all flex items-center gap-1.5 shadow-sm"
+          className="w-full sm:w-auto bg-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl hover:bg-primary-dark transition-all flex items-center justify-center gap-1.5 shadow-sm"
         >
           <Plus className="w-4 h-4" /> Add New Botanical Item
         </button>

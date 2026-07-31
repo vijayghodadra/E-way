@@ -165,36 +165,39 @@ const QuickViewModal = () => {
 
             {/* Actions */}
             <div className="space-y-3 pt-4 border-t border-stone-100">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center border border-stone-200 rounded-xl bg-stone-50">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex items-center justify-between sm:justify-start border border-stone-200 rounded-xl bg-stone-50 p-1 w-full sm:w-auto">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-3 py-2 text-stone-600 hover:text-primary font-bold"
+                    className="w-10 h-10 flex items-center justify-center text-stone-600 hover:text-primary font-bold"
                   >
                     -
                   </button>
-                  <span className="px-3 text-xs font-semibold">{quantity}</span>
+                  <span className="w-10 text-center text-xs font-semibold">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="px-3 py-2 text-stone-600 hover:text-primary font-bold"
+                    className="w-10 h-10 flex items-center justify-center text-stone-600 hover:text-primary font-bold"
                   >
                     +
                   </button>
                 </div>
 
-                <button
-                  onClick={handleAddToCart}
-                  className="flex-1 bg-primary text-white text-xs font-semibold py-3.5 rounded-2xl hover:bg-primary-dark transition-all shadow-luxury flex items-center justify-center gap-2"
-                >
-                  <ShoppingBag className="w-4 h-4" /> Add to Cart
-                </button>
+                <div className="flex flex-1 gap-2.5">
+                  <button
+                    onClick={handleAddToCart}
+                    className="flex-1 bg-primary text-white text-xs font-semibold py-3.5 rounded-2xl hover:bg-primary-dark transition-all shadow-luxury flex items-center justify-center gap-2 min-h-[46px]"
+                  >
+                    <ShoppingBag className="w-4 h-4" /> Add to Cart
+                  </button>
 
-                <button
-                  onClick={handleToggleWishlist}
-                  className="p-3 rounded-2xl border border-stone-200 hover:border-rose-400 hover:text-rose-500 text-stone-600 transition-colors"
-                >
-                  <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`} />
-                </button>
+                  <button
+                    onClick={handleToggleWishlist}
+                    className="p-3 rounded-2xl border border-stone-250 hover:border-rose-450 hover:text-rose-500 text-stone-600 transition-colors flex items-center justify-center shrink-0 w-[46px] h-[46px]"
+                    title="Add to Wishlist"
+                  >
+                    <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`} />
+                  </button>
+                </div>
               </div>
 
               <div className="flex items-center justify-center gap-2 text-[11px] text-stone-400 font-medium pt-2">
