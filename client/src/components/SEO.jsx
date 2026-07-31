@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, image, url, schema }) => {
-  const siteTitle = title ? `${title} | Earthora` : 'Earthora | Luxury Brand';
+  const siteTitle = title ? (title.includes('Earthora') ? title : `${title} | Earthora`) : 'Earthora | Luxurybrand';
   const metaDescription = description || 'Discover ultra-premium bio-active serums, cold-pressed facial elixirs, and traditional Ayurvedic luxury skincare.';
   const metaImage = image || 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800';
 

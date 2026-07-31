@@ -42,7 +42,7 @@ const Home = () => {
   return (
     <>
       <SEO
-        title="Luxury Clean Beauty & Bio-Active Remedies"
+        title="Earthora | Luxurybrand"
         description="Experience the pinnacle of clean luxury skincare, herbal scalps elixirs, and cold-pressed botanical oils."
       />
 
