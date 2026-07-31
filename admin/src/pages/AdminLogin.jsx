@@ -8,10 +8,21 @@ import logo from '../assets/logo.png';
 
 const AdminLogin = ({ setAdminToken }) => {
   const navigate = useNavigate();
+  const getCurrentFinancialYear = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 0-indexed: 3 = April
+    const startYear = month >= 3 ? year : year - 1;
+    return `${startYear}-${startYear + 1}`;
+  };
+
   const [email, setEmail] = useState('admin@earthora.com');
   const [password, setPassword] = useState('admin@earthora123');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [financialYear, setFinancialYear] = useState(
+    localStorage.getItem('financial_year') || getCurrentFinancialYear()
+  );
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,6 +32,8 @@ const AdminLogin = ({ setAdminToken }) => {
       if (res.data.user?.role === 'admin') {
         localStorage.setItem('admin_token', res.data.token);
         localStorage.setItem('admin_user', JSON.stringify(res.data.user));
+        localStorage.setItem('financial_year', financialYear);
+        axios.defaults.headers.common['X-Financial-Year'] = financialYear;
         setAdminToken(res.data.token);
         toast.success('Welcome to Admin Portal!');
         navigate('/');
@@ -81,6 +94,21 @@ const AdminLogin = ({ setAdminToken }) => {
                 Show Password
               </label>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-stone-300 mb-1 font-semibold">Active Financial Year</label>
+            <select
+              value={financialYear}
+              onChange={(e) => setFinancialYear(e.target.value)}
+              className="w-full bg-stone-900 border border-stone-700 rounded-xl px-3.5 py-3 text-white focus:outline-none focus:border-accent text-xs font-semibold cursor-pointer"
+            >
+              <option value="2025-2026">2025-2026 (1 Apr 2025 - 31 Mar 2026)</option>
+              <option value="2026-2027">2026-2027 (1 Apr 2026 - 31 Mar 2027)</option>
+              <option value="2027-2028">2027-2028 (1 Apr 2027 - 31 Mar 2028)</option>
+              <option value="2028-2029">2028-2029 (1 Apr 2028 - 31 Mar 2029)</option>
+              <option value="2029-2030">2029-2030 (1 Apr 2029 - 31 Mar 2030)</option>
+            </select>
           </div>
 
           <button

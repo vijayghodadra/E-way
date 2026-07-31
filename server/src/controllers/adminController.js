@@ -4,33 +4,71 @@ const Order = require('../models/Order');
 const Category = require('../models/Category');
 const Coupon = require('../models/Coupon');
 
+// Utility to parse financial year (1st April to 31st March)
+const getFinancialYearDates = (fyString) => {
+  if (!fyString || !/^\d{4}-\d{4}$/.test(fyString)) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth(); // 0-indexed: 3 = April
+    const startYear = month >= 3 ? year : year - 1;
+    return {
+      start: new Date(Date.UTC(startYear, 3, 1, 0, 0, 0, 0)),
+      end: new Date(Date.UTC(startYear + 1, 2, 31, 23, 59, 59, 999))
+    };
+  }
+
+  const [startYearStr] = fyString.split('-');
+  const startYear = parseInt(startYearStr, 10);
+  return {
+    start: new Date(Date.UTC(startYear, 3, 1, 0, 0, 0, 0)),
+    end: new Date(Date.UTC(startYear + 1, 2, 31, 23, 59, 59, 999))
+  };
+};
+
 // @desc Get Dashboard Analytics Metrics
 // @route GET /api/v1/admin/analytics
 const getAnalytics = async (req, res, next) => {
   try {
+    const { start, end } = getFinancialYearDates(req.headers['x-financial-year']);
+    const dateFilter = {
+      createdAt: {
+        $gte: start,
+        $lte: end
+      }
+    };
+
     const totalUsers = await User.countDocuments({ role: 'user' });
     const totalProducts = await Product.countDocuments();
-    const totalOrders = await Order.countDocuments();
+    const totalOrders = await Order.countDocuments(dateFilter);
 
-    const orders = await Order.find({ isPaid: true });
+    const orders = await Order.find({ isPaid: true, ...dateFilter });
     const totalRevenue = orders.reduce((acc, order) => acc + order.totalPrice, 0);
 
-    const recentOrders = await Order.find({})
+    const recentOrders = await Order.find(dateFilter)
       .populate('user', 'name email')
       .sort({ createdAt: -1 })
       .limit(6);
 
     const lowStockProducts = await Product.find({ stock: { $lte: 10 } }).limit(5);
 
-    // Sales data chart simulation
-    const salesChart = [
-      { month: 'Jan', sales: 42000 },
-      { month: 'Feb', sales: 68000 },
-      { month: 'Mar', sales: 95000 },
-      { month: 'Apr', sales: 120000 },
-      { month: 'May', sales: 185000 },
-      { month: 'Jun', sales: 240000 }
-    ];
+    // Calculate actual monthly sales aggregated for the selected financial year
+    const monthlySales = {};
+    const months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+    months.forEach(m => monthlySales[m] = 0);
+
+    orders.forEach(o => {
+      const date = new Date(o.createdAt);
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const mName = monthNames[date.getMonth()];
+      if (monthlySales[mName] !== undefined) {
+        monthlySales[mName] += o.totalPrice;
+      }
+    });
+
+    const salesChart = months.map(m => ({
+      month: m,
+      sales: Math.round(monthlySales[m])
+    }));
 
     res.json({
       success: true,
@@ -140,7 +178,14 @@ const deleteProduct = async (req, res, next) => {
 // @route GET /api/v1/admin/orders
 const getAllOrders = async (req, res, next) => {
   try {
-    const orders = await Order.find({})
+    const { start, end } = getFinancialYearDates(req.headers['x-financial-year']);
+    const dateFilter = {
+      createdAt: {
+        $gte: start,
+        $lte: end
+      }
+    };
+    const orders = await Order.find(dateFilter)
       .populate('user', 'name email phone')
       .sort({ createdAt: -1 });
     res.json({ success: true, orders });

@@ -223,7 +223,7 @@ const OrdersManager = () => {
           </button>
           <button
             onClick={exportToPDF}
-            className="bg-stone-880 hover:bg-stone-900 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-sm"
+            className="bg-stone-800 hover:bg-stone-900 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-sm"
           >
             <Printer className="w-4 h-4" /> Export PDF/Print
           </button>

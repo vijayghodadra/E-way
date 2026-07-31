@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Package, ShoppingBag, Tag, LogOut, ShieldCheck, ArrowLeft } from 'lucide-react';
-
+import axios from 'axios';
 
 import Dashboard from './Dashboard';
 import ProductsManager from './ProductsManager';
@@ -14,6 +14,22 @@ function AdminPortal() {
   const navigate = useNavigate();
   const location = useLocation();
   const [adminToken, setAdminToken] = useState(localStorage.getItem('admin_token'));
+  const [financialYear, setFinancialYear] = useState(
+    localStorage.getItem('financial_year') || '2026-2027'
+  );
+
+  useEffect(() => {
+    if (adminToken) {
+      axios.defaults.headers.common['X-Financial-Year'] = financialYear;
+    }
+  }, [financialYear, adminToken]);
+
+  const handleFYChange = (e) => {
+    const nextFY = e.target.value;
+    localStorage.setItem('financial_year', nextFY);
+    setFinancialYear(nextFY);
+    window.location.reload();
+  };
 
   if (!adminToken) {
     return <AdminLogin setAdminToken={setAdminToken} />;
@@ -42,9 +58,22 @@ function AdminPortal() {
           <img src={logo} alt="EarthOra Logo" className="h-7 object-contain brightness-0 invert" />
           <span className="text-[10px] text-amber-305 font-bold uppercase tracking-wider pl-1">Admin Portal</span>
         </div>
-        <Link to="/" className="text-xs text-amber-300 flex items-center gap-1">
-          <ArrowLeft className="w-3.5 h-3.5" /> Back to Store
-        </Link>
+        <div className="flex items-center gap-2">
+          <select
+            value={financialYear}
+            onChange={handleFYChange}
+            className="bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-[10px] text-amber-302 font-bold focus:outline-none"
+          >
+            <option value="2025-2026">FY 25-26</option>
+            <option value="2026-2027">FY 26-27</option>
+            <option value="2027-2028">FY 27-28</option>
+            <option value="2028-2029">FY 28-29</option>
+            <option value="2029-2030">FY 29-30</option>
+          </select>
+          <Link to="/" className="text-[10px] text-stone-400 hover:text-white flex items-center gap-1 font-semibold">
+            <ArrowLeft className="w-3 h-3" /> Store
+          </Link>
+        </div>
       </div>
 
       {/* Desktop Sidebar */}
@@ -53,6 +82,22 @@ function AdminPortal() {
           <div className="flex flex-col gap-2">
             <img src={logo} alt="EarthOra Logo" className="h-10 object-contain self-start brightness-0 invert" />
             <span className="text-[9px] text-amber-305 tracking-widest uppercase font-bold pl-1">ADMIN PORTAL</span>
+            
+            {/* Financial Year Selector */}
+            <div className="mt-2.5 pl-1 pr-2">
+              <label className="block text-[8px] text-stone-500 font-bold uppercase tracking-wider mb-1">Financial Year</label>
+              <select
+                value={financialYear}
+                onChange={handleFYChange}
+                className="w-full bg-stone-800 border border-stone-700 rounded-xl px-2.5 py-1.5 text-xs text-amber-302 font-bold focus:outline-none cursor-pointer"
+              >
+                <option value="2025-2026">2025-2026</option>
+                <option value="2026-2027">2026-2027</option>
+                <option value="2027-2028">2027-2028</option>
+                <option value="2028-2029">2028-2029</option>
+                <option value="2029-2030">2029-2030</option>
+              </select>
+            </div>
           </div>
 
           <nav className="space-y-2 text-xs font-semibold">
