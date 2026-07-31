@@ -8,7 +8,7 @@ import wishlistReducer from './slices/wishlistSlice';
 import uiReducer from './slices/uiSlice';
 
 const persistConfig = {
-  key: 'root_eway_luxury',
+  key: 'root_earthora_luxury',
   version: 1,
   storage,
   whitelist: ['auth', 'cart', 'wishlist'], // Persist user auth, shopping cart, and wishlist across sessions

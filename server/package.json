@@ -1,5 +1,5 @@
 {
-  "name": "eway-luxury-server",
+  "name": "earthora-luxury-server",
   "version": "1.0.0",
   "description": "Production REST API server for Elixir Botanicals Luxury E-Commerce platform",
   "main": "src/server.js",

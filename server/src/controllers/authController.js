@@ -105,7 +105,7 @@ const refreshToken = async (req, res, next) => {
       return res.status(401).json({ success: false, message: 'No refresh token provided' });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET || 'luxury_refresh_secret_key_eway_2026_super_secure');
+    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET || 'luxury_refresh_secret_key_earthora_2026_super_secure');
     const user = await User.findById(decoded.id);
 
     if (!user || user.refreshToken !== token) {

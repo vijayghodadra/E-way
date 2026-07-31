@@ -7,7 +7,7 @@ const connectDB = async () => {
     return;
   }
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/eway_luxury_db';
+    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/earthora_luxury_db';
     const conn = await mongoose.connect(mongoUri);
     isConnected = true;
     console.log(`[MongoDB Connected]: ${conn.connection.host}`);

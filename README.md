@@ -33,7 +33,7 @@ A production-ready luxury beauty e-commerce web platform inspired by *Aesop, For
 ## 📁 Repository Structure
 
 ```
-c:/Users/vijay/Desktop/E-Way/
+c:/Users/vijay/Desktop/Earthora/
 ├── client/          # React 19 + Vite + Tailwind CSS Storefront Application
 ├── admin/           # React 19 + Vite + Tailwind CSS Admin Control Panel
 ├── server/          # Node.js + Express + MongoDB REST API Backend
@@ -51,9 +51,9 @@ Copy `.env.example` to `.env` inside `/server`, `/client`, and `/admin`.
 #### Server Environment (`server/.env`)
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/eway_luxury_db
-JWT_SECRET=luxury_secret_key_eway_2026_super_secure
-JWT_REFRESH_SECRET=luxury_refresh_secret_key_eway_2026_super_secure
+MONGO_URI=mongodb://localhost:27017/earthora_luxury_db
+JWT_SECRET=luxury_secret_key_earthora_2026_super_secure
+JWT_REFRESH_SECRET=luxury_refresh_secret_key_earthora_2026_super_secure
 CLIENT_URL=http://localhost:3000
 ADMIN_URL=http://localhost:3001
 RAZORPAY_KEY_ID=rzp_test_YourKeyIdHere
@@ -92,5 +92,5 @@ npm run dev
 ---
 
 ## 📄 Documentation
-- Detailed API Specs: [`docs/API_DOCUMENTATION.md`](file:///c:/Users/vijay/Desktop/E-Way/docs/API_DOCUMENTATION.md)
-- Deployment Walkthrough: [`docs/DEPLOYMENT_GUIDE.md`](file:///c:/Users/vijay/Desktop/E-Way/docs/DEPLOYMENT_GUIDE.md)
+- Detailed API Specs: [`docs/API_DOCUMENTATION.md`](file:///c:/Users/vijay/Desktop/Earthora/docs/API_DOCUMENTATION.md)
+- Deployment Walkthrough: [`docs/DEPLOYMENT_GUIDE.md`](file:///c:/Users/vijay/Desktop/Earthora/docs/DEPLOYMENT_GUIDE.md)
